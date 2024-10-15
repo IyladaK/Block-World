@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
@@ -9,7 +10,9 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 
 public class GridWindow extends JPanel {
 
@@ -18,6 +21,8 @@ public class GridWindow extends JPanel {
     private static final int C_S = 30;
     HashMap<Coord, Integer> filledCoords = new HashMap<Coord, Integer>();
     int curColor = 1;
+    boolean hasStart;
+    boolean hasGoal;
     
 
     public GridWindow() {
@@ -76,7 +81,8 @@ public class GridWindow extends JPanel {
             g.drawLine(col * C_S, 0, col * C_S, ROWS * C_S);
         }
 
-        
+        this.hasStart = false;
+        this.hasGoal = false;
         for (Coord coord : filledCoords.keySet()) {
             switch (filledCoords.get(coord)) {
                 case 1:
@@ -88,6 +94,13 @@ public class GridWindow extends JPanel {
                 case 3:
                     g.setColor(Color.RED);
                     break;
+                case 4:
+                    g.setColor(Color.ORANGE);
+                    hasStart = true;
+                    break;
+                case 5:
+                    g.setColor(Color.GREEN);
+                    hasGoal = true;
                 default:
                     break;
             }
@@ -132,25 +145,55 @@ public class GridWindow extends JPanel {
             gridPanel.setCurColor(3);
         });
 
+        JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel description = new JLabel("Create your map!");
+        description.setFont(new Font("Arial", Font.PLAIN, 25));
+        header.add(description);
         
         JPanel buttonPanel2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton button5 = new JButton("Finish");
-        button5.setPreferredSize(new Dimension(210, 40));
-        buttonPanel2.add(button5);
-        button5.addActionListener(e -> {
-            System.out.println("here");
+        JPanel buttonPanel3 = new JPanel();
+
+        JButton start = new JButton("Set Start");
+        JButton goal = new JButton("Set Goal");
+        JButton finish = new JButton("Finish");
+        finish.setPreferredSize(new Dimension(210, 40));
+        buttonPanel2.add(finish);
+        buttonPanel3.add(start);
+        buttonPanel3.add(goal);
+        finish.addActionListener(e -> {
+            if(!gridPanel.hasGoal){
+                description.setText("Please set at least one goal block");
+                description.setForeground(Color.RED);
+            }
+            if(!gridPanel.hasStart){
+                description.setText("Please set at least one start block");
+                description.setForeground(Color.RED);
+            }
+        });
+        start.addActionListener(e -> {
+            gridPanel.setCurColor(4);
+        });
+        goal.addActionListener(e -> {
+            gridPanel.setCurColor(5);
         });
 
         // Create a main panel to hold both button panels
+        JPanel secondaryPanel = new JPanel();
+        secondaryPanel.setLayout(new BorderLayout());
+        secondaryPanel.add(buttonPanel2, BorderLayout.EAST);
+        secondaryPanel.add(buttonPanel3, BorderLayout.WEST);
+
+
         JPanel mainButtonPanel = new JPanel();
         mainButtonPanel.setLayout(new BorderLayout());
         mainButtonPanel.add(buttonPanel1, BorderLayout.NORTH);
-        mainButtonPanel.add(buttonPanel2, BorderLayout.SOUTH);
+        mainButtonPanel.add(secondaryPanel, BorderLayout.SOUTH);
 
         // Set up the main layout with BorderLayout
         frame.setLayout(new BorderLayout());
         frame.add(gridPanel, BorderLayout.CENTER);
         frame.add(mainButtonPanel, BorderLayout.SOUTH);
+        frame.add(header, BorderLayout.NORTH);
 
         frame.pack();
         frame.setLocationRelativeTo(null);
