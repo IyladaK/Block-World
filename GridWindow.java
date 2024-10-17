@@ -108,14 +108,7 @@ public class GridWindow extends JPanel {
         }
     }
 
-
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("GridWindow");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Create the grid panel
-        GridWindow gridPanel = new GridWindow();
+    public JPanel levelBuilder(){
 
         JPanel compiler = new JPanel();
 
@@ -134,17 +127,17 @@ public class GridWindow extends JPanel {
         buttonPanel1.add(erase);
 
         erase.addActionListener(e -> {
-            gridPanel.setCurColor(0);
+            this.setCurColor(0);
         });
 
         black.addActionListener(e -> {
-            gridPanel.setCurColor(1);
+            this.setCurColor(1);
         });
         blue.addActionListener(e -> {
-            gridPanel.setCurColor(2);
+            this.setCurColor(2);
         });
         red.addActionListener(e -> {
-            gridPanel.setCurColor(3);
+            this.setCurColor(3);
         });
 
         JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -163,10 +156,10 @@ public class GridWindow extends JPanel {
         buttonPanel3.add(start);
         buttonPanel3.add(goal);
         finish.addActionListener(e -> {
-            if(!gridPanel.hasGoal){
+            if(!this.hasGoal){
                 description.setText("Please set at least one goal block");
                 description.setForeground(Color.RED);
-            } else if (!gridPanel.hasStart) {
+            } else if (!this.hasStart) {
                 description.setText("Please set at least one start block");
                 description.setForeground(Color.RED);
             } else {
@@ -175,10 +168,10 @@ public class GridWindow extends JPanel {
             
         });
         start.addActionListener(e -> {
-            gridPanel.setCurColor(4);
+            this.setCurColor(4);
         });
         goal.addActionListener(e -> {
-            gridPanel.setCurColor(5);
+            this.setCurColor(5);
         });
 
         // Create a main panel to hold both button panels
@@ -195,10 +188,22 @@ public class GridWindow extends JPanel {
 
         // Set up the main layout with BorderLayout
         compiler.setLayout(new BorderLayout());
-        compiler.add(gridPanel, BorderLayout.CENTER);
+        compiler.add(this, BorderLayout.CENTER);
         compiler.add(mainButtonPanel, BorderLayout.SOUTH);
         compiler.add(header, BorderLayout.NORTH);
-        frame.add(compiler);
+
+        return compiler;
+
+    }
+
+
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("GridWindow");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        frame.add((new GridWindow()).levelBuilder());
 
         frame.pack();
         frame.setLocationRelativeTo(null);
