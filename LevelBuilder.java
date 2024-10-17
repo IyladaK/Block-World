@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class GridWindow extends JPanel {
+public class LevelBuilder extends JPanel {
 
     private static final int ROWS = 18;
     private static final int COLS = 32;
@@ -25,7 +25,7 @@ public class GridWindow extends JPanel {
     boolean hasGoal;
     
 
-    public GridWindow() {
+    public LevelBuilder() {
         setPreferredSize(new Dimension(COLS * C_S, ROWS * C_S));
         setBackground(Color.WHITE);
 
@@ -196,18 +196,4 @@ public class GridWindow extends JPanel {
 
     }
 
-
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("GridWindow");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-        frame.add((new GridWindow()).levelBuilder());
-
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setVisible(true);
-    }
 }
