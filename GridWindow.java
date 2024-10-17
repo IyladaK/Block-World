@@ -117,6 +117,8 @@ public class GridWindow extends JPanel {
         // Create the grid panel
         GridWindow gridPanel = new GridWindow();
 
+        JPanel compiler = new JPanel();
+
         // Panel for the first row of buttons (Red, Blue, Black, Erase)
         JPanel buttonPanel1 = new JPanel();
         buttonPanel1.setLayout(new GridLayout(1, 4, 10, 10)); // 1 row, 4 columns, 10px gaps
@@ -164,11 +166,13 @@ public class GridWindow extends JPanel {
             if(!gridPanel.hasGoal){
                 description.setText("Please set at least one goal block");
                 description.setForeground(Color.RED);
-            }
-            if(!gridPanel.hasStart){
+            } else if (!gridPanel.hasStart) {
                 description.setText("Please set at least one start block");
                 description.setForeground(Color.RED);
+            } else {
+                compiler.setVisible(false);
             }
+            
         });
         start.addActionListener(e -> {
             gridPanel.setCurColor(4);
@@ -190,10 +194,11 @@ public class GridWindow extends JPanel {
         mainButtonPanel.add(secondaryPanel, BorderLayout.SOUTH);
 
         // Set up the main layout with BorderLayout
-        frame.setLayout(new BorderLayout());
-        frame.add(gridPanel, BorderLayout.CENTER);
-        frame.add(mainButtonPanel, BorderLayout.SOUTH);
-        frame.add(header, BorderLayout.NORTH);
+        compiler.setLayout(new BorderLayout());
+        compiler.add(gridPanel, BorderLayout.CENTER);
+        compiler.add(mainButtonPanel, BorderLayout.SOUTH);
+        compiler.add(header, BorderLayout.NORTH);
+        frame.add(compiler);
 
         frame.pack();
         frame.setLocationRelativeTo(null);
