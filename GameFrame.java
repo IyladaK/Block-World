@@ -1,18 +1,36 @@
+import java.awt.CardLayout;
+import java.util.logging.Level;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class GameFrame {
+public class GameFrame extends JFrame{
 
-    public JFrame createFrame(){
-        JFrame frame = new JFrame("GridWindow");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    CardLayout cardLayout;
 
-        frame.add((new LevelBuilder()).levelBuilder());
+    private JPanel levelBuilder = (new LevelBuilder()).levelBuilder();
+    private JPanel startMenu = (new StartMenu(this)).StartPanel();
 
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setVisible(true);
+    public GameFrame(){
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("BlockWorld");
 
-        return frame;
+        cardLayout = new CardLayout();
+        setLayout(cardLayout);
+
+        add(this.startMenu);
+        add(this.levelBuilder, "levelBuilder");
+        System.out.println(levelBuilder.getWidth() + " " + levelBuilder.getHeight());
+        pack();
+
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setVisible(true);
+
     }
+
+    public void switchMenuToGame(){
+        this.cardLayout.show(getContentPane(), "levelBuilder");
+    }
+
 }

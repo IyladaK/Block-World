@@ -9,8 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class Panels {
+public class StartMenu extends JPanel{
 
+    public GameFrame parentFrame;
     final int originalTileSize = 1;
     final int scale = 40;
 
@@ -20,7 +21,12 @@ public class Panels {
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
 
-    public JPanel StartPanel () {
+    public StartMenu(GameFrame parentFrame){
+        this.parentFrame = parentFrame;
+    }
+
+
+    public JPanel StartPanel() {
 
         // creating the panel
         JPanel startPanel = new JPanel();
@@ -99,6 +105,10 @@ public class Panels {
 
         JButton toGame = new JButton("Start Playing");
         toGame.setBounds(500, 300, 120, 50);
+        toGame.addActionListener(e -> {
+            this.parentFrame.switchMenuToGame();
+        });
+        
         
         // adding all the components to the start panel
         startPanel.add(title);
@@ -126,26 +136,5 @@ public class Panels {
 
     }
 
-    private static JPanel AddSquare(Color color){
-        JPanel square = new JPanel();
-        square.setBackground(color);
-        square.setPreferredSize(new Dimension(120, 120));
-        return square;
-
-    }
-
-    public static void main(String[] args) {
-        JFrame window = new JFrame();
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setTitle("Box World");
-
-        Panels panels = new Panels();
-
-        window.add(panels.StartPanel());
-        window.pack();
-
-        window.setVisible(true);
-    }
 
 }
