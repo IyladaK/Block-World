@@ -9,7 +9,6 @@ public class GameFrame extends JFrame{
     CardLayout cardLayout;
 
     private JPanel levelBuilder = (new LevelBuilder()).levelBuilder();
-    private JPanel startMenu = (new StartMenu(this)).StartPanel();
     private JPanel menuScreen = new MenuScreen(this);
 
     public GameFrame(){
@@ -20,7 +19,6 @@ public class GameFrame extends JFrame{
         setLayout(cardLayout);
 
         add(this.menuScreen);
-        add(this.startMenu);
         add(this.levelBuilder, "levelBuilder");
         System.out.println(levelBuilder.getWidth() + " " + levelBuilder.getHeight());
         pack();
