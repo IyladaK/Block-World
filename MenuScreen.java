@@ -8,11 +8,11 @@ import javax.swing.JPanel;
 
 public class MenuScreen extends JPanel{
     
-    public GameFrame parentFrame; //parent frame for panel switching functions
+    public MainFrame parentFrame; //parent frame for panel switching functions
     private Image bg = new ImageIcon("resources/MenuScreen-1.jpg").getImage();
     private Image bgTwo = new ImageIcon("resources/MenuScreen-2.jpg").getImage();
 
-    public MenuScreen(GameFrame parentFrame){
+    public MenuScreen(MainFrame parentFrame){
         this.parentFrame = parentFrame;
 
         setPreferredSize(new Dimension(960, 687));

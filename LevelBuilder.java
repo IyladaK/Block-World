@@ -14,17 +14,20 @@ import javax.swing.JPanel;
 
 
 public class LevelBuilder extends JPanel {
+    MainFrame parentFrame;
 
     private static final int ROWS = 18;
     private static final int COLS = 32;
     private static final int C_S = 30;
-    HashMap<Coord, Integer> filledCoords = new HashMap<Coord, Integer>();
+    private HashMap<Coord, Integer> filledCoords = new HashMap<Coord, Integer>();
     int curColor = 1;
     boolean hasStart;
     boolean hasGoal;
     
 
-    public LevelBuilder() {
+    public LevelBuilder(MainFrame parentFrame) {
+        this.parentFrame = parentFrame;
+
         setPreferredSize(new Dimension(COLS * C_S, ROWS * C_S));
         setBackground(Color.WHITE);
 
@@ -64,6 +67,10 @@ public class LevelBuilder extends JPanel {
 
     void setCurColor(int newColor) {
         curColor = newColor;
+    }
+
+    public HashMap<Coord, Integer> getFilledCoords(){
+        return filledCoords;
     }
 
     @Override
@@ -162,7 +169,7 @@ public class LevelBuilder extends JPanel {
                 description.setText("Please set at least one start block");
                 description.setForeground(Color.RED);
             } else {
-                compiler.setVisible(false);
+                this.parentFrame.switchLevelBuilderToGame();
             }
             
         });
