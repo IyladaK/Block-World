@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -11,13 +12,14 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements ActionListener{
 
+    HashMap<Coord, Integer> filledCoords;
     BoxPeople player;
     ArrayList<GameWall> walls = new ArrayList<>();
     
-
     Timer gameTimer;
 
-    public GamePanel() {
+    public GamePanel(HashMap<Coord, Integer> filledCoords) {
+        this.filledCoords = filledCoords;
 
         player = new BoxPeople(400, 300, this);
 
@@ -43,20 +45,10 @@ public class GamePanel extends JPanel implements ActionListener{
     }
 
     public void makeWalls() {
-        for(int i = 30; i < 930; i += 30) {
-            walls.add(new GameWall(i, 450, 30, 30));
-
+    
+        for(Coord key: filledCoords.keySet()){
+            walls.add(new GameWall(key.x * 30, key.y * 30, 30, 30));
         }
-
-        walls.add(new GameWall(30, 420, 30, 30));
-        walls.add(new GameWall(30, 390, 30, 30));
-        walls.add(new GameWall(30, 360, 30, 30));
-        walls.add(new GameWall(450, 420, 30, 30));
-        walls.add(new GameWall(450, 390, 30, 30));
-        walls.add(new GameWall(450, 360, 30, 30));
-        walls.add(new GameWall(270, 420, 30, 30));
-        
-        
 
 
     }

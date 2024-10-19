@@ -9,23 +9,25 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class GridWindow extends JPanel {
+public class LevelBuilder extends JPanel {
+    MainFrame parentFrame;
 
     private static final int ROWS = 18;
     private static final int COLS = 32;
     private static final int C_S = 30;
-    HashMap<Coord, Integer> filledCoords = new HashMap<Coord, Integer>();
+    private HashMap<Coord, Integer> filledCoords = new HashMap<Coord, Integer>();
     int curColor = 1;
     boolean hasStart;
     boolean hasGoal;
     
 
-    public GridWindow() {
+    public LevelBuilder(MainFrame parentFrame) {
+        this.parentFrame = parentFrame;
+
         setPreferredSize(new Dimension(COLS * C_S, ROWS * C_S));
         setBackground(Color.WHITE);
 
@@ -65,6 +67,10 @@ public class GridWindow extends JPanel {
 
     void setCurColor(int newColor) {
         curColor = newColor;
+    }
+
+    public HashMap<Coord, Integer> getFilledCoords(){
+        return filledCoords;
     }
 
     @Override
@@ -163,7 +169,7 @@ public class GridWindow extends JPanel {
                 description.setText("Please set at least one start block");
                 description.setForeground(Color.RED);
             } else {
-                compiler.setVisible(false);
+                this.parentFrame.switchLevelBuilderToGame();
             }
             
         });
@@ -196,18 +202,4 @@ public class GridWindow extends JPanel {
 
     }
 
-
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("GridWindow");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-        frame.add((new GridWindow()).levelBuilder());
-
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setVisible(true);
-    }
 }
