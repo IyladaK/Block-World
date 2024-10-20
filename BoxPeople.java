@@ -1,6 +1,9 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+/**
+ * The box people class.
+ */
 
 public class BoxPeople {
 
@@ -21,6 +24,12 @@ public class BoxPeople {
     boolean keyUp;
     boolean keyDown;
 
+    /**
+     * The constructor for the box people.
+     * @param x x coordinate of the position of the box person 
+     * @param y y coordinate of the position of the box person
+     * @param panel creates an instance of the GamePanel class 
+     */
     public BoxPeople(int x, int y, GamePanel panel) {
         
         this.panel = panel;
@@ -34,16 +43,24 @@ public class BoxPeople {
 
     }
 
+    /**
+     * the set method.
+     * this links key input to the movemento of the box people
+     * 
+     */
     public void set() {
-
+        // Slows down the person if no keys are being pressed
         if (keyLeft && keyRight || !keyLeft && !keyRight) {
-            xSpeed *= 0.8;
+            xSpeed *= 0.6;
         } else if (keyLeft && !keyRight) {
+            //moves to th left
             xSpeed--;
         } else if (keyRight && !keyLeft) {
+            //moves to the right
             xSpeed++;
         }
 
+        //stops the box person when it is moving very slowly
         if (xSpeed > 0 && xSpeed < 0.75) {
             xSpeed = 0;
         }
@@ -51,32 +68,42 @@ public class BoxPeople {
             xSpeed = 0;
         }
 
-        if (xSpeed > 7) {
-            xSpeed = 7;
+        // Restricts x speed to a specified range
+        if (xSpeed > 5) {
+            xSpeed = 5;
+        }
+        if (xSpeed < -5) {
+            xSpeed = -5;
         }
 
-        if (xSpeed < -7) {
-            xSpeed = -7;
+        // Maximum value for y
+        if (ySpeed > 8) {
+            ySpeed = 8;
         }
+
+        //Gravity
+        ySpeed += 0.3; 
 
         if (keyUp) {
-            //Check if touching ground
+            //Jump only if touching ground
+            boolean onGround = false;
+
             hitBox.y++;
 
             for (GameWall wall: panel.walls) {
-
-                if (wall.hitBox.intersects(hitBox)) {
-                    ySpeed = -6;
+                if (wall.hitBox.intersects(hitBox) && wall.hitBox.y > hitBox.y) {
+                    onGround = true;
+                    break;
                 }
-                hitBox.y--;
-
             }
 
+            if (onGround) {
+                ySpeed = -5;
+            }
+            hitBox.y--;
         }
 
-        ySpeed += 0.3;
-
-        //horizontal collisions 
+        //Horizontal collisions, checks to see if movement will cause a collision.
         hitBox.x += xSpeed;
         for (GameWall wall : panel.walls) {
             if (hitBox.intersects(wall.hitBox)) {
@@ -91,7 +118,6 @@ public class BoxPeople {
         }
 
         //vertical collisions
-
         hitBox.y += ySpeed;
         for (GameWall wall : panel.walls) {
             if (hitBox.intersects(wall.hitBox)) {
