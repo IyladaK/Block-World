@@ -20,6 +20,8 @@ public class GamePanel extends JPanel implements ActionListener{
 
     Coord startCoord;
     Coord goalCoord;
+    final int COLS = 32;
+    final int ROWS = 18;
     
     Timer gameTimer;
 
@@ -51,25 +53,40 @@ public class GamePanel extends JPanel implements ActionListener{
 
     }
 
-    public void addRedWall(Coord key){
+    public void addRedWall(Coord key) {
         walls.add(new Walls.RedWall(key.x * 30, key.y * 30, 30, 30));
     }
 
-    public void addBlackWall(Coord key){
+    public void addBlackWall(Coord key) {
         walls.add(new Walls.BlackWall(key.x * 30, key.y * 30, 30, 30));
     }
 
-    public void addBlueWall(Coord key){
+    public void addBlueWall(Coord key) {
         walls.add(new Walls.BlueWall(key.x * 30, key.y * 30, 30, 30));
     }
 
 
 
     public void makeWalls() {
+        // setting the start and goal blocks
         walls.add(new Walls.StartWall(startCoord.x * 30, startCoord.y * 30, 30, 30));
         walls.add(new Walls.GoalWall(goalCoord.x * 30, goalCoord.y * 30, 30, 30));
+
+        // creating off screen red layer for void death
+        // creating top off-screeen black layer for window bounds
+        for (int i = 0; i < 30 * this.COLS; i += 30) {
+            walls.add(new Walls.RedWall(i, (ROWS + 8) * 30, 30, 30));
+            walls.add(new Walls.BlackWall(i, -30, 30, 30));
+        }
+
+        //creating off screen black layer for window bounds
+        for (int i = -30; i < 30 * (ROWS + 8); i += 30) {
+            walls.add(new Walls.BlackWall(-30, i, 30, 30));
+            walls.add(new Walls.BlackWall((COLS) * 30, i, 30, 30));
+        }
+
     
-        for(Coord key: filledCoords.keySet()){
+        for (Coord key: filledCoords.keySet()) {
             switch (filledCoords.get(key)) {
                 case 1:
                     walls.add(new Walls.BlackWall(key.x * 30, key.y * 30, 30, 30));

@@ -49,9 +49,10 @@ public class BoxPeople {
 
     }
 
+
     public void hitRed(){
         this.x = INIT_X;
-        this.y = INIT_Y;
+        this.y = INIT_Y - 30;
     }
 
     public void reachedGoal(){
@@ -160,7 +161,7 @@ public class BoxPeople {
                     y = hitBox.y;
                 }
 
-                
+
                 //color hit detection
                 if (wall instanceof Walls.RedWall) {
                     this.hitRed();
