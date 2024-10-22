@@ -21,8 +21,11 @@ public class LevelBuilder extends JPanel {
     private static final int C_S = 30;
     private HashMap<Coord, Integer> filledCoords = new HashMap<Coord, Integer>();
     int curColor = 1;
-    boolean hasStart;
-    boolean hasGoal;
+
+    private boolean hasStart;
+    private boolean hasGoal;
+    private Coord startCoord;
+    private Coord goalCoord;
     
 
     public LevelBuilder(MainFrame parentFrame) {
@@ -73,6 +76,14 @@ public class LevelBuilder extends JPanel {
         return filledCoords;
     }
 
+    public Coord getStartCoord(){
+        return this.startCoord;
+    }
+
+    public Coord getGoalCoord(){
+        return this.goalCoord;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -103,10 +114,13 @@ public class LevelBuilder extends JPanel {
                 case 4:
                     g.setColor(Color.ORANGE);
                     hasStart = true;
+                    startCoord = coord;
                     break;
                 case 5:
                     g.setColor(Color.GREEN);
                     hasGoal = true;
+                    goalCoord = coord;
+                    break;
                 default:
                     break;
             }

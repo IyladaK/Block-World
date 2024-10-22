@@ -13,15 +13,22 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel implements ActionListener{
 
     HashMap<Coord, Integer> filledCoords;
+    HashMap<Integer, Runnable> wallMap;
+
     BoxPeople player;
-    ArrayList<GameWall> walls = new ArrayList<>();
+    ArrayList<Walls.GameWall> walls = new ArrayList<>();
+
+    Coord startCoord;
+    Coord goalCoord;
     
     Timer gameTimer;
 
-    public GamePanel(HashMap<Coord, Integer> filledCoords) {
+    public GamePanel(HashMap<Coord, Integer> filledCoords, Coord startCoord, Coord goalCoord) {
         this.filledCoords = filledCoords;
+        this.startCoord = startCoord;
+        this.goalCoord = goalCoord;
 
-        player = new BoxPeople(400, 300, this);
+        player = new BoxPeople(startCoord.x * 30, (startCoord.y - 1) * 30, this);
 
         makeWalls();
 
@@ -44,11 +51,40 @@ public class GamePanel extends JPanel implements ActionListener{
 
     }
 
+    public void addRedWall(Coord key){
+        walls.add(new Walls.RedWall(key.x * 30, key.y * 30, 30, 30));
+    }
+
+    public void addBlackWall(Coord key){
+        walls.add(new Walls.BlackWall(key.x * 30, key.y * 30, 30, 30));
+    }
+
+    public void addBlueWall(Coord key){
+        walls.add(new Walls.BlueWall(key.x * 30, key.y * 30, 30, 30));
+    }
+
+
+
     public void makeWalls() {
+        walls.add(new Walls.StartWall(startCoord.x * 30, startCoord.y * 30, 30, 30));
+        walls.add(new Walls.GoalWall(goalCoord.x * 30, goalCoord.y * 30, 30, 30));
     
         for(Coord key: filledCoords.keySet()){
-            walls.add(new GameWall(key.x * 30, key.y * 30, 30, 30));
+            switch (filledCoords.get(key)) {
+                case 1:
+                    walls.add(new Walls.BlackWall(key.x * 30, key.y * 30, 30, 30));
+                    break;
+                case 2:
+                    walls.add(new Walls.BlueWall(key.x * 30, key.y * 30, 30, 30));
+                    break;
+                case 3:
+                    walls.add(new Walls.RedWall(key.x * 30, key.y * 30, 30, 30));
+                    break;
+                default:
+                    break;
+            }
         }
+
 
 
     }
@@ -61,9 +97,9 @@ public class GamePanel extends JPanel implements ActionListener{
 
         player.draw(gtd);
 
-        for( GameWall wall: walls) wall.draw(gtd);
-        
-        
+        for(Walls.GameWall wall: walls){
+            wall.draw(gtd);
+        }       
     }
 
 

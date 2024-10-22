@@ -11,6 +11,9 @@ public class BoxPeople {
 
     int x;
     int y;
+    final int INIT_X;
+    final int INIT_Y;
+
     int width;
     int height;
 
@@ -24,6 +27,7 @@ public class BoxPeople {
     boolean keyUp;
     boolean keyDown;
 
+
     /**
      * The constructor for the box people.
      * @param x x coordinate of the position of the box person 
@@ -31,16 +35,34 @@ public class BoxPeople {
      * @param panel creates an instance of the GamePanel class 
      */
     public BoxPeople(int x, int y, GamePanel panel) {
+        System.out.println("here");
         
         this.panel = panel;
         this.x = x;
         this.y = y;
+        this.INIT_X = x;
+        this.INIT_Y = y;
+        System.out.println(INIT_X + " " + INIT_Y);
 
         width = 30;
         height = 60;
 
         hitBox = new Rectangle(x, y, width, height);
 
+    }
+
+    public void hitRed(){
+        this.x = INIT_X;
+        this.y = INIT_Y;
+    }
+
+    public void hitBlue(){
+        this.y -= 10;
+        ySpeed += 0.3;
+    }
+
+    public void reachedGoal(){
+        System.out.println("REACHED GOAL!");
     }
 
     /**
@@ -90,7 +112,7 @@ public class BoxPeople {
 
             hitBox.y++;
 
-            for (GameWall wall: panel.walls) {
+            for (Walls.GameWall wall: panel.walls) {
                 if (wall.hitBox.intersects(hitBox) && wall.hitBox.y > hitBox.y) {
                     onGround = true;
                     break;
@@ -105,29 +127,53 @@ public class BoxPeople {
 
         //Horizontal collisions, checks to see if movement will cause a collision.
         hitBox.x += xSpeed;
-        for (GameWall wall : panel.walls) {
+        for (Walls.GameWall wall : panel.walls) {
             if (hitBox.intersects(wall.hitBox)) {
                 hitBox.x -= xSpeed;
+
                 while (!wall.hitBox.intersects(hitBox)) {
                     hitBox.x += Math.signum(xSpeed);
                 }
                 hitBox.x -=  Math.signum(xSpeed);
                 xSpeed = 0;
                 x = hitBox.x;
+
+                //color hit detection
+                if (wall instanceof Walls.RedWall) {
+                    this.hitRed();
+                }
+
+                if (wall instanceof Walls.BlueWall && keyUp) {
+                    this.hitBlue();
+                }
+
+                if (wall instanceof Walls.GoalWall) {
+                    this.reachedGoal();
+                }
             }
         }
 
         //vertical collisions
         hitBox.y += ySpeed;
-        for (GameWall wall : panel.walls) {
+        for (Walls.GameWall wall : panel.walls) {
             if (hitBox.intersects(wall.hitBox)) {
                 hitBox.y -= ySpeed;
+
                 while (!wall.hitBox.intersects(hitBox)) {
                     hitBox.y += Math.signum(ySpeed);
                 }
                 hitBox.y -=  Math.signum(ySpeed);
                 ySpeed = 0;
                 y = hitBox.y;
+
+                //color hit detection
+                if (wall instanceof Walls.RedWall) {
+                    this.hitRed();
+                }
+
+                if (wall instanceof Walls.GoalWall) {
+                    this.reachedGoal();
+                }
             }
         }
 
