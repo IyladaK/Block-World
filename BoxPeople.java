@@ -35,8 +35,6 @@ public class BoxPeople {
      * @param panel creates an instance of the GamePanel class 
      */
     public BoxPeople(int x, int y, GamePanel panel) {
-        System.out.println("here");
-        
         this.panel = panel;
         this.x = x;
         this.y = y;
@@ -54,11 +52,6 @@ public class BoxPeople {
     public void hitRed(){
         this.x = INIT_X;
         this.y = INIT_Y;
-    }
-
-    public void hitBlue(){
-        this.y -= 10;
-        ySpeed += 0.3;
     }
 
     public void reachedGoal(){
@@ -129,27 +122,25 @@ public class BoxPeople {
         hitBox.x += xSpeed;
         for (Walls.GameWall wall : panel.walls) {
             if (hitBox.intersects(wall.hitBox)) {
-                hitBox.x -= xSpeed;
+                if (!(wall instanceof Walls.BlueWall)) {
+                    hitBox.x -= xSpeed;
 
-                while (!wall.hitBox.intersects(hitBox)) {
-                    hitBox.x += Math.signum(xSpeed);
-                }
-                hitBox.x -=  Math.signum(xSpeed);
-                xSpeed = 0;
-                x = hitBox.x;
+                    while (!wall.hitBox.intersects(hitBox)) {
+                        hitBox.x += Math.signum(xSpeed);
+                    }
+                    hitBox.x -=  Math.signum(xSpeed);
+                    xSpeed = 0;
+                    x = hitBox.x;
 
-                //color hit detection
-                if (wall instanceof Walls.RedWall) {
-                    this.hitRed();
-                }
+                    //color hit detection
+                    if (wall instanceof Walls.RedWall) {
+                        this.hitRed();
+                    }
 
-                if (wall instanceof Walls.BlueWall && keyUp) {
-                    this.hitBlue();
-                }
-
-                if (wall instanceof Walls.GoalWall) {
-                    this.reachedGoal();
-                }
+                    if (wall instanceof Walls.GoalWall) {
+                        this.reachedGoal();
+                    }
+                } 
             }
         }
 
@@ -157,15 +148,19 @@ public class BoxPeople {
         hitBox.y += ySpeed;
         for (Walls.GameWall wall : panel.walls) {
             if (hitBox.intersects(wall.hitBox)) {
-                hitBox.y -= ySpeed;
 
-                while (!wall.hitBox.intersects(hitBox)) {
-                    hitBox.y += Math.signum(ySpeed);
+                if (!(wall instanceof Walls.BlueWall)){
+                    hitBox.y -= ySpeed;
+
+                    while (!wall.hitBox.intersects(hitBox)) {
+                        hitBox.y += Math.signum(ySpeed);
+                    }
+                    hitBox.y -=  Math.signum(ySpeed);
+                    ySpeed = 0;
+                    y = hitBox.y;
                 }
-                hitBox.y -=  Math.signum(ySpeed);
-                ySpeed = 0;
-                y = hitBox.y;
 
+                
                 //color hit detection
                 if (wall instanceof Walls.RedWall) {
                     this.hitRed();

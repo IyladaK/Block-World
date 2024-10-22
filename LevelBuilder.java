@@ -31,6 +31,12 @@ public class LevelBuilder extends JPanel {
     public LevelBuilder(MainFrame parentFrame) {
         this.parentFrame = parentFrame;
 
+        //create bottom floor
+        for(int i = 0; i < COLS; i++){
+            filledCoords.put(new Coord(i, 17), 1);
+        }
+
+
         setPreferredSize(new Dimension(COLS * C_S, ROWS * C_S));
         setBackground(Color.WHITE);
 
