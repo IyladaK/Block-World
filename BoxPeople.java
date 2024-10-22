@@ -182,7 +182,7 @@ public class BoxPeople {
     }
 
     public void draw(Graphics2D gtd) {
-        gtd.setColor(Color.PINK);
+        gtd.setColor(new Color(255, 0, 118));
         gtd.fillRect(x, y, width, height);
 
     }

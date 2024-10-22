@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements ActionListener{
@@ -17,6 +20,8 @@ public class GamePanel extends JPanel implements ActionListener{
 
     BoxPeople player;
     ArrayList<Walls.GameWall> walls = new ArrayList<>();
+
+    private Image bg = new ImageIcon("resources/cloudBg.jpg").getImage();
 
     Coord startCoord;
     Coord goalCoord;
@@ -111,6 +116,7 @@ public class GamePanel extends JPanel implements ActionListener{
         super.paint(g);
 
         Graphics2D gtd = (Graphics2D) g;
+        gtd.drawImage(bg, 0, 0, this.getWidth(), this.getHeight(), this);
 
         player.draw(gtd);
 

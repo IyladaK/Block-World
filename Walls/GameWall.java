@@ -25,9 +25,7 @@ public class GameWall{
     }
 
     public void draw(Graphics2D gtd) {
-        gtd.setColor(Color.WHITE);
-        gtd.drawRect(x, y, width, height);
         gtd.setColor(this.color);
-        gtd.fillRect(x + 1, y + 1, width - 2, height - 2);
+        gtd.fillRect(x, y, width, height);
     }
 }
