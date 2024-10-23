@@ -6,10 +6,12 @@ public class SecondaryFrame extends JFrame{
     HashMap<Coord, Integer> filledCoords;
     Coord startCoord;
     Coord goalCoord;
+    boolean isMultiplayer;
     
-    public SecondaryFrame(HashMap<Coord, Integer> filledCoords, Coord startCoord, Coord goalCoord) {
+    public SecondaryFrame(HashMap<Coord, Integer> filledCoords, Coord startCoord, Coord goalCoord, boolean isMultiplayer) {
         this.startCoord = startCoord;
         this.goalCoord = goalCoord;
+        this.isMultiplayer = isMultiplayer;
         
         setSize(960, 687);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,13 +20,16 @@ public class SecondaryFrame extends JFrame{
         setLocationRelativeTo(null);
         setVisible(true);
 
-        GamePanel panel = new GamePanel(filledCoords, startCoord, goalCoord);
+        GamePanel panel = new GamePanel(filledCoords, startCoord, goalCoord, isMultiplayer);
         panel.setSize(this.getSize());
         panel.setBackground(Color.WHITE);
         panel.setVisible(true);
         this.add(panel);
 
-        addKeyListener(new KeyChecker(panel));
+        addKeyListener(new KeyChecker(panel.player));
+        if (isMultiplayer){
+            addKeyListener(new KeyChecker(panel.playerTwo));
+        }
 
     }
 

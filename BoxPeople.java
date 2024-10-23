@@ -22,6 +22,8 @@ public class BoxPeople {
 
     Rectangle hitBox;
 
+    Color color;
+
     boolean keyLeft;
     boolean keyRight;
     boolean keyUp;
@@ -182,7 +184,7 @@ public class BoxPeople {
     }
 
     public void draw(Graphics2D gtd) {
-        gtd.setColor(new Color(255, 0, 118));
+        gtd.setColor(this.color);
         gtd.fillRect(x, y, width, height);
 
     }

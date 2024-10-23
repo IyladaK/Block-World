@@ -1,8 +1,6 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import java.awt.CardLayout;
-import java.awt.Color;
 
 public class MainFrame extends JFrame{
 
@@ -33,7 +31,7 @@ public class MainFrame extends JFrame{
     }
 
     public void switchLevelBuilderToGame(){
-        new SecondaryFrame(lb.getFilledCoords(), lb.getStartCoord(), lb.getGoalCoord());
+        new SecondaryFrame(lb.getFilledCoords(), lb.getStartCoord(), lb.getGoalCoord(), false);
 
     }
 
