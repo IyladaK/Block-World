@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import java.awt.Image;
 import javax.swing.ImageIcon;
-
 import javax.swing.JPanel;
+
 
 public class GamePanel extends JPanel implements ActionListener{
 

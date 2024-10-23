@@ -8,9 +8,14 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
+
+import javax.swing.ImageIcon;
+import java.awt.Image;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 
 
 public class LevelBuilder extends JPanel {
@@ -21,6 +26,14 @@ public class LevelBuilder extends JPanel {
     private static final int C_S = 30;
     private HashMap<Coord, Integer> filledCoords = new HashMap<Coord, Integer>();
     int curColor = 1;
+
+    private Image bg = new ImageIcon("resources/gridCloudBg.jpg").getImage();
+
+    private final Color RED = new Color(237, 50, 46);
+    private final Color BLUE = new Color(15, 158, 213);
+    private final Color ORANGE = new Color(237, 99, 44);
+    private final Color GREEN = new Color(71, 212, 90);
+
 
     private boolean hasStart;
     private boolean hasGoal;
@@ -82,11 +95,11 @@ public class LevelBuilder extends JPanel {
         return filledCoords;
     }
 
-    public Coord getStartCoord(){
+    public Coord getStartCoord() {
         return this.startCoord;
     }
 
-    public Coord getGoalCoord(){
+    public Coord getGoalCoord() {
         return this.goalCoord;
     }
 
@@ -94,15 +107,7 @@ public class LevelBuilder extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.setColor(new Color(200, 200, 200));
-
-        for (int row = 0; row <= ROWS; row++) {
-            g.drawLine(0, row * C_S, COLS * C_S, row * C_S);
-        }
-
-        for (int col = 0; col <= COLS; col++) {
-            g.drawLine(col * C_S, 0, col * C_S, ROWS * C_S);
-        }
+        g.drawImage(bg, 0, 0, this.getWidth(), this.getHeight(), this);
 
         this.hasStart = false;
         this.hasGoal = false;
@@ -112,18 +117,18 @@ public class LevelBuilder extends JPanel {
                     g.setColor(Color.BLACK);
                     break;
                 case 2:
-                    g.setColor(Color.BLUE);
+                    g.setColor(this.BLUE);
                     break;
                 case 3:
-                    g.setColor(Color.RED);
+                    g.setColor(this.RED);
                     break;
                 case 4:
-                    g.setColor(Color.ORANGE);
+                    g.setColor(this.ORANGE);
                     hasStart = true;
                     startCoord = coord;
                     break;
                 case 5:
-                    g.setColor(Color.GREEN);
+                    g.setColor(this.GREEN);
                     hasGoal = true;
                     goalCoord = coord;
                     break;

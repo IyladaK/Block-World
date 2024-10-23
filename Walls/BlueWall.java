@@ -13,7 +13,7 @@ public class BlueWall extends GameWall{
     @Override
     public void draw(Graphics2D gtd) {
         gtd.setColor(this.color);
-        gtd.fillRect(x + 5, y, width - 10, height);
+        gtd.fillRect(x + 7, y, width - 14, height);
     }
 
     
