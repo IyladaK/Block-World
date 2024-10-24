@@ -34,12 +34,13 @@ public class GamePanel extends JPanel{
         this.filledCoords = filledCoords;
         this.startCoord = startCoord;
         this.goalCoord = goalCoord;
+        this.isMultiplayer = isMultiplayer;
 
-        player = new FirstPlayer(startCoord.x * 30, (startCoord.y - 1) * 30, this);
-        
-        if (isMultiplayer){
-            playerTwo = new SecondPlayer(startCoord.x * 30, (startCoord.y - 2) * 30, this);
+        player = new FirstPlayer((startCoord.x) * 30, (startCoord.y - 1) * 30, this);
+        if (isMultiplayer) {
+            playerTwo = new SecondPlayer(startCoord.x * 30, (startCoord.y - 1) * 30, this);
         }
+        
 
         makeWalls();
 
@@ -52,17 +53,14 @@ public class GamePanel extends JPanel{
             public void run() {
                 // TODO 
                 player.set();
-                if (isMultiplayer){
+                if (isMultiplayer) {
                     playerTwo.set();
                 }
+   
                 repaint();
-
-                
             }
             
         },0, 17 );
-
-
     }
 
     public void addRedWall(Coord key) {
@@ -126,11 +124,12 @@ public class GamePanel extends JPanel{
         gtd.drawImage(bg, 0, 0, this.getWidth(), this.getHeight(), this);
 
         player.draw(gtd);
+        
         if (isMultiplayer) {
             playerTwo.draw(gtd);
         }
-
-        for(Walls.GameWall wall: walls){
+        
+        for (Walls.GameWall wall: walls) {
             wall.draw(gtd);
         }       
     }

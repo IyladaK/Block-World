@@ -13,7 +13,7 @@ public class MainFrame extends JFrame{
         setSize(960, 687);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setTitle("Box World");
+        setTitle("Blox World");
         setLocationRelativeTo(null);
         setVisible(true);
 
@@ -31,7 +31,7 @@ public class MainFrame extends JFrame{
     }
 
     public void switchLevelBuilderToGame(){
-        new SecondaryFrame(lb.getFilledCoords(), lb.getStartCoord(), lb.getGoalCoord(), false);
+        new SecondaryFrame(lb.getFilledCoords(), lb.getStartCoord(), lb.getGoalCoord(), true);
 
     }
 

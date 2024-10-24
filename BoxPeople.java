@@ -42,7 +42,6 @@ public class BoxPeople {
         this.y = y;
         this.INIT_X = x;
         this.INIT_Y = y;
-        System.out.println(INIT_X + " " + INIT_Y);
 
         width = 30;
         height = 60;

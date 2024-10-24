@@ -26,8 +26,9 @@ public class SecondaryFrame extends JFrame{
         panel.setVisible(true);
         this.add(panel);
 
+
         addKeyListener(new KeyChecker(panel.player));
-        if (isMultiplayer){
+        if (isMultiplayer) {
             addKeyListener(new KeyChecker(panel.playerTwo));
         }
 
