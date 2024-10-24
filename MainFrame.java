@@ -32,14 +32,17 @@ public class MainFrame extends JFrame{
 
     }
 
-    // public void switchMenuToGame(){
-    //     this.cardLayout.show(getContentPane(), "levelBuilder");
-
-    // }
-
     public void switchMenuToPlayer(){
         this.cardLayout.show(getContentPane(), "playerScreen");
 
+    }
+
+    public void switchGameToEnd() {
+        this.cardLayout.show(getContentPane(), "endScreen");
+    }
+
+    public void switchEndToPlayer() {
+        this.cardLayout.show(getContentPane(), "playerScreen");
     }
 
     public void switchPlayerToLevelB(){

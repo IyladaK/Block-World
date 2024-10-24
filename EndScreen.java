@@ -20,13 +20,13 @@ public class EndScreen extends JPanel{
         JButton toMenu = new JButton();
 
         // creating invisible start button
-        toMenu.setBounds(672, 513, 228, 126);
-        // toMenu.addActionListener(e -> {
-        //     this.parentFrame.switchMenuToGame();
-        // });
-        // toMenu.setOpaque(false);
-        // toMenu.setContentAreaFilled(false);
-        // toMenu.setBorderPainted(false);
+        toMenu.setBounds(672, 480, 228, 126);
+        toMenu.addActionListener(e -> {
+            this.parentFrame.switchEndToPlayer();
+        });
+        toMenu.setOpaque(false);
+        toMenu.setContentAreaFilled(false);
+        toMenu.setBorderPainted(false);
 
         add(toMenu);
 
