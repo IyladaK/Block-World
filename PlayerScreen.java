@@ -16,18 +16,30 @@ public class PlayerScreen extends JPanel{
         setPreferredSize(new Dimension(960, 687));
         setLayout(null);
 
-        JButton toGame = new JButton();
+        JButton toGameOneP = new JButton();
+        JButton toGameTwoP = new JButton();
 
-        // creating invisible start button
-        toGame.setBounds(672, 513, 228, 126);
-        toGame.addActionListener(e -> {
-            this.parentFrame.switchMenuToGame();
+        // // creating invisible start button
+        toGameOneP.setBounds(590, 530, 200, 80);
+        toGameTwoP.setBounds(160, 530, 200, 80);
+
+        toGameOneP.addActionListener(e -> {
+            this.parentFrame.switchPlayerToLevelB();
         });
-        // toGame.setOpaque(false);
-        // toGame.setContentAreaFilled(false);
-        // toGame.setBorderPainted(false);
+        toGameOneP.setOpaque(false);
+        toGameOneP.setContentAreaFilled(false);
+        toGameOneP.setBorderPainted(false);
 
-        add(toGame);
+        toGameTwoP.addActionListener(e -> {
+            this.parentFrame.switchPlayerToLevelB();
+        });
+        toGameTwoP.setOpaque(false);
+        toGameTwoP.setContentAreaFilled(false);
+        toGameTwoP.setBorderPainted(false);
+
+
+        add(toGameOneP);
+        add(toGameTwoP);
 
     }
 
