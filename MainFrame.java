@@ -8,6 +8,8 @@ public class MainFrame extends JFrame{
 
     CardLayout cardLayout;
     private MenuScreen menuScreen = new MenuScreen(this);
+    private PlayerScreen playerScreen = new PlayerScreen(this);
+    private EndScreen endScreen = new EndScreen(this);
     private LevelBuilder lb = new LevelBuilder(this);
     private JPanel levelBuilder = lb.levelBuilder();
     
@@ -23,7 +25,10 @@ public class MainFrame extends JFrame{
         setLayout(cardLayout);
 
         add(this.menuScreen, "menuScreen");
+        add(this.playerScreen, "playerScreen");
+        add(this.endScreen, "endScreen");
         add(this.levelBuilder, "levelBuilder");
+
 
     }
 

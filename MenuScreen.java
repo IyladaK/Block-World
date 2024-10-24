@@ -17,18 +17,18 @@ public class MenuScreen extends JPanel{
         setPreferredSize(new Dimension(960, 687));
         setLayout(null);
 
-        JButton toGame = new JButton();
+        JButton toPlayers = new JButton();
 
         // creating invisible start button
-        toGame.setBounds(672, 513, 228, 126);
-        toGame.addActionListener(e -> {
+        toPlayers.setBounds(672, 513, 228, 126);
+        toPlayers.addActionListener(e -> {
             this.parentFrame.switchMenuToGame();
         });
-        toGame.setOpaque(false);
-        toGame.setContentAreaFilled(false);
-        toGame.setBorderPainted(false);
+        toPlayers.setOpaque(false);
+        toPlayers.setContentAreaFilled(false);
+        toPlayers.setBorderPainted(false);
 
-        add(toGame);
+        add(toPlayers);
 
     }
 

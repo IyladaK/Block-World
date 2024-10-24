@@ -1,33 +1,34 @@
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class PlayerScreen extends JPanel{
+public class EndScreen extends JPanel{
 
     public MainFrame parentFrame; //parent frame for panel switching functions
-    private Image bg = new ImageIcon("resources/ChoosePlayers.jpg").getImage();
-    
-    public PlayerScreen(MainFrame parentFrame){
+    private Image bg = new ImageIcon("resources/EndScreen.jpg").getImage();
+
+     public EndScreen(MainFrame parentFrame){
         this.parentFrame = parentFrame;
 
         setPreferredSize(new Dimension(960, 687));
         setLayout(null);
 
-        JButton toGame = new JButton();
+        JButton toMenu = new JButton();
 
         // creating invisible start button
-        toGame.setBounds(672, 513, 228, 126);
-        toGame.addActionListener(e -> {
+        toMenu.setBounds(672, 513, 228, 126);
+        toMenu.addActionListener(e -> {
             this.parentFrame.switchMenuToGame();
         });
-        // toGame.setOpaque(false);
-        // toGame.setContentAreaFilled(false);
-        // toGame.setBorderPainted(false);
+        // toMenu.setOpaque(false);
+        // toMenu.setContentAreaFilled(false);
+        // toMenu.setBorderPainted(false);
 
-        add(toGame);
+        add(toMenu);
 
     }
 
@@ -36,5 +37,5 @@ public class PlayerScreen extends JPanel{
         super.paintComponent(g);
         g.drawImage(bg, 0, 0, this.getWidth(), this.getHeight(), this);
     }
-
+    
 }
