@@ -3,6 +3,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 /**
  * The box people class.
+ * The class which creates the characters for this game and specifies their movement. 
  */
 
 public class BoxPeople {
