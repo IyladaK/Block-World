@@ -45,7 +45,7 @@ public class MainFrame extends JFrame{
     public void switchLevelBuilderToGame(){
         contentPane.removeAll();  // Remove all components
         GamePanel panel = new GamePanel(levelBuilderObj.getFilledCoords(), 
-                        levelBuilderObj.getStartCoord(), levelBuilderObj.getGoalCoord(), false);
+                        levelBuilderObj.getStartCoord(), levelBuilderObj.getGoalCoord(), playerScreen.getMultiplayer());
         panel.setPreferredSize(contentPane.getSize());  // Use contentPane's size
         panel.setBackground(Color.WHITE);
 

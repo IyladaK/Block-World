@@ -4,6 +4,5 @@ public class PlatformerGame {
 
         new MainFrame();
 
-
     }
 }
