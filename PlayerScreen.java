@@ -9,6 +9,8 @@ public class PlayerScreen extends JPanel{
 
     public MainFrame parentFrame; //parent frame for panel switching functions
     private Image bg = new ImageIcon("resources/ChoosePlayers.jpg").getImage();
+    boolean isMultiplayer;
+    
     
     public PlayerScreen(MainFrame parentFrame){
         this.parentFrame = parentFrame;
@@ -20,27 +22,32 @@ public class PlayerScreen extends JPanel{
         JButton toGameTwoP = new JButton();
 
         // // creating invisible start button
-        toGameOneP.setBounds(590, 530, 200, 80);
-        toGameTwoP.setBounds(160, 530, 200, 80);
-
-        toGameOneP.addActionListener(e -> {
-            this.parentFrame.switchPlayerToLevelB();
-        });
-        toGameOneP.setOpaque(false);
-        toGameOneP.setContentAreaFilled(false);
-        toGameOneP.setBorderPainted(false);
+        toGameTwoP.setBounds(590, 530, 200, 80);
+        toGameOneP.setBounds(160, 530, 200, 80);
 
         toGameTwoP.addActionListener(e -> {
             this.parentFrame.switchPlayerToLevelB();
+            isMultiplayer = true;
         });
         toGameTwoP.setOpaque(false);
         toGameTwoP.setContentAreaFilled(false);
         toGameTwoP.setBorderPainted(false);
 
+        toGameOneP.addActionListener(e -> {
+            this.parentFrame.switchPlayerToLevelB();
+            isMultiplayer = false;
+        });
+        toGameOneP.setOpaque(false);
+        toGameOneP.setContentAreaFilled(false);
+        toGameOneP.setBorderPainted(false);
 
         add(toGameOneP);
         add(toGameTwoP);
 
+    }
+
+    public boolean getMultiplayer() {
+        return isMultiplayer;
     }
 
     @Override

@@ -49,7 +49,7 @@ public class MainFrame extends JFrame{
     }
 
     public void switchLevelBuilderToGame(){
-        new SecondaryFrame(lb.getFilledCoords(), lb.getStartCoord(), lb.getGoalCoord(), true);
+        new SecondaryFrame(lb.getFilledCoords(), lb.getStartCoord(), lb.getGoalCoord(), playerScreen.getMultiplayer());
 
     }
 

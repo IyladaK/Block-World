@@ -63,6 +63,7 @@ public class GamePanel extends JPanel{
         },0, 17 );
     }
 
+
     public void addRedWall(Coord key) {
         walls.add(new Walls.RedWall(key.x * 30, key.y * 30, 30, 30));
     }
