@@ -22,7 +22,7 @@ public class MenuScreen extends JPanel{
         // creating invisible start button
         toGame.setBounds(672, 513, 228, 126);
         toGame.addActionListener(e -> {
-            this.parentFrame.switchMenuToGame();
+            this.parentFrame.switchMenuToLevelBuilder();
         });
         toGame.setOpaque(false);
         toGame.setContentAreaFilled(false);

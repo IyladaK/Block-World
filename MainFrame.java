@@ -1,38 +1,70 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.CardLayout;
+import javax.swing.JButton;
+import java.awt.FlowLayout;
+import java.util.HashMap;
+
+import javax.swing.Timer;
+
+import java.awt.Color;
+
+import java.awt.Container;
+
 
 public class MainFrame extends JFrame{
+    MenuScreen menuScreen = new MenuScreen(this);
+    LevelBuilder levelBuilderObj = new LevelBuilder(this);
+    JPanel levelBuilder = levelBuilderObj.levelBuilder();
+    GamePanel game;
+    Container contentPane;
 
-    CardLayout cardLayout;
-    private MenuScreen menuScreen = new MenuScreen(this);
-    private LevelBuilder lb = new LevelBuilder(this);
-    private JPanel levelBuilder = lb.levelBuilder();
-    
-    public MainFrame() {
-        setSize(960, 687);
+    public MainFrame(){
+        setTitle("BloxWorld");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1000, 700);
         setResizable(false);
-        setTitle("Blox World");
         setLocationRelativeTo(null);
+
+        contentPane = this.getContentPane();
+        contentPane.setLayout(new FlowLayout());
+        contentPane.add(menuScreen);
+
         setVisible(true);
 
-        cardLayout = new CardLayout();
-        setLayout(cardLayout);
-
-        add(this.menuScreen, "menuScreen");
-        add(this.levelBuilder, "levelBuilder");
-
+        // Remove all components after a delay
+        // Timer timer = new Timer(2000, e -> {
+        //     contentPane.removeAll();  // Remove all components
+        //     contentPane.add(levelBuilder);
+        //     contentPane.revalidate(); // Revalidate layout
+        //     contentPane.repaint();    // Repaint to update UI
+        // });
+        // timer.setRepeats(false); // Run only once
+        // timer.start();
     }
 
-    public void switchMenuToGame(){
-        this.cardLayout.show(getContentPane(), "levelBuilder");
+    public void switchMenuToLevelBuilder(){
+        contentPane.removeAll();  // Remove all components
+        contentPane.add(levelBuilder);
+        contentPane.revalidate(); // Revalidate layout
+        contentPane.repaint();    // Repaint to update UI
 
     }
 
     public void switchLevelBuilderToGame(){
-        new SecondaryFrame(lb.getFilledCoords(), lb.getStartCoord(), lb.getGoalCoord(), true);
+        contentPane.removeAll();  // Remove all components
+        GamePanel panel = new GamePanel(levelBuilderObj.getFilledCoords(), 
+                        levelBuilderObj.getStartCoord(), levelBuilderObj.getGoalCoord(), false);
+        panel.setPreferredSize(contentPane.getSize());  // Use contentPane's size
+        panel.setBackground(Color.WHITE);
+
+        contentPane.add(panel);  // Add panel to contentPane
+        panel.setFocusable(true);  // Make panel focusable
+        panel.requestFocusInWindow();
+        panel.addKeyListener(new KeyChecker(panel.player));
+
+        contentPane.revalidate(); // Revalidate layout
+        contentPane.repaint(); 
+        
 
     }
-
 }

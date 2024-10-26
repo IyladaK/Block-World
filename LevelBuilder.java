@@ -91,7 +91,7 @@ public class LevelBuilder extends JPanel {
         curColor = newColor;
     }
 
-    public HashMap<Coord, Integer> getFilledCoords(){
+    public HashMap<Coord, Integer> getFilledCoords() {
         return filledCoords;
     }
 
