@@ -27,7 +27,7 @@ public class LevelBuilder extends JPanel {
     private HashMap<Coord, Integer> filledCoords = new HashMap<Coord, Integer>();
     int curColor = 1;
 
-    private Image bg = new ImageIcon("resources/gridCloudBg.jpg").getImage();
+    private Image bg = new ImageIcon("resources/gridCloudBg.png").getImage();
 
     private final Color red = new Color(237, 50, 46);
     private final Color blue = new Color(15, 158, 213);

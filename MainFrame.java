@@ -1,11 +1,17 @@
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import java.awt.Font;
+import java.awt.Dimension;
+
 import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.Container;
 
 
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame {
     MenuScreen menuScreen = new MenuScreen(this);
     PlayerScreen playerScreen = new PlayerScreen(this);
     LevelBuilder levelBuilderObj = new LevelBuilder(this);
@@ -17,7 +23,7 @@ public class MainFrame extends JFrame{
         setTitle("BloxWorld");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(960, 725);
-        setResizable(false);
+        setResizable(true);
         setLocationRelativeTo(null);
 
         contentPane = this.getContentPane();
@@ -44,17 +50,39 @@ public class MainFrame extends JFrame{
 
     public void switchLevelBuilderToGame(){
         contentPane.removeAll();  // Remove all components
+        
+        JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        JLabel description = new JLabel("Play!");
+        description.setFont(new Font("Arial", Font.PLAIN, 25));
+        header.add(description);
+
         GamePanel panel = new GamePanel(levelBuilderObj.getFilledCoords(), 
-                        levelBuilderObj.getStartCoord(), levelBuilderObj.getGoalCoord(), playerScreen.getMultiplayer());
+                        levelBuilderObj.getStartCoord(), levelBuilderObj.getGoalCoord(), 
+                        playerScreen.getMultiplayer());
         panel.setPreferredSize(contentPane.getSize());  // Use contentPane's size
         panel.setBackground(Color.WHITE);
+        panel.setFocusable(true);
 
-        contentPane.add(panel);  // Add panel to contentPane
-        panel.setFocusable(true);  // Make panel focusable
+        JButton editLevel = new JButton("Edit Level");
+        editLevel.addActionListener(e -> {
+            panel.requestFocusInWindow();
+        });
+        
+        editLevel.setPreferredSize(new Dimension(210, 40));
+        header.add(editLevel);
+
+        contentPane.add(header);
+        contentPane.add(panel);
+
         panel.requestFocusInWindow();
-        panel.addKeyListener(new KeyChecker(panel.player));
 
-        contentPane.revalidate(); // Revalidate layout
+        panel.addKeyListener(new KeyChecker(panel.player));
+        if (playerScreen.getMultiplayer()) {
+            panel.addKeyListener(new KeyChecker(panel.playerTwo));
+        }
+
+        contentPane.revalidate();
         contentPane.repaint(); 
         
 

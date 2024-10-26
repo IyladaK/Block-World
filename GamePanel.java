@@ -22,7 +22,7 @@ public class GamePanel extends JPanel{
 
     ArrayList<Walls.GameWall> walls = new ArrayList<>();
 
-    private Image bg = new ImageIcon("resources/cloudBg.jpg").getImage();
+    private Image bg = new ImageIcon("resources/cloudBg.png").getImage();
 
     Coord startCoord;
     Coord goalCoord;
@@ -37,7 +37,7 @@ public class GamePanel extends JPanel{
         this.goalCoord = goalCoord;
         this.isMultiplayer = isMultiplayer;
 
-        setPreferredSize(new Dimension(960, 687));
+        setPreferredSize(new Dimension(32 * 30, 18 * 30));
 
 
         player = new FirstPlayer((startCoord.x) * 30, (startCoord.y - 1) * 30, this);
@@ -124,7 +124,7 @@ public class GamePanel extends JPanel{
         super.paint(g);
 
         Graphics2D gtd = (Graphics2D) g;
-        gtd.drawImage(bg, 0, 0, this.getWidth(), this.getHeight(), this);
+        gtd.drawImage(bg, 0, 0, 32 * 30, 21 * 30, this);
 
         player.draw(gtd);
         

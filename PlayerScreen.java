@@ -8,10 +8,12 @@ import javax.swing.JPanel;
 public class PlayerScreen extends JPanel{
 
     public MainFrame parentFrame; //parent frame for panel switching functions
-    private Image bg = new ImageIcon("resources/ChoosePlayers.jpg").getImage();
+    private Image bg = new ImageIcon("resources/ChoosePlayers.png").getImage();
     boolean isMultiplayer;
+    final int WIDTH = 960;
+    final int HEIGHT = 687;
     
-    
+
     public PlayerScreen(MainFrame parentFrame){
         this.parentFrame = parentFrame;
 
@@ -22,8 +24,8 @@ public class PlayerScreen extends JPanel{
         JButton toGameTwoP = new JButton();
 
         // // creating invisible start button
-        toGameTwoP.setBounds(590, 530, 200, 80);
-        toGameOneP.setBounds(160, 530, 200, 80);
+        toGameTwoP.setBounds(600, 555, 205, 90);
+        toGameOneP.setBounds(165, 555, 205, 90);
 
         toGameTwoP.addActionListener(e -> {
             this.parentFrame.switchPlayerToLevelB();
