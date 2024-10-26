@@ -1,8 +1,6 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import java.awt.CardLayout;
-import java.awt.Color;
 
 public class MainFrame extends JFrame{
 
@@ -17,7 +15,7 @@ public class MainFrame extends JFrame{
         setSize(960, 687);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setTitle("Box World");
+        setTitle("Blox World");
         setLocationRelativeTo(null);
         setVisible(true);
 
@@ -51,7 +49,7 @@ public class MainFrame extends JFrame{
     }
 
     public void switchLevelBuilderToGame(){
-        new SecondaryFrame(lb.getFilledCoords(), lb.getStartCoord(), lb.getGoalCoord());
+        new SecondaryFrame(lb.getFilledCoords(), lb.getStartCoord(), lb.getGoalCoord(), playerScreen.getMultiplayer());
 
     }
 

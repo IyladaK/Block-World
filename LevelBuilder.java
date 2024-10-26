@@ -29,10 +29,10 @@ public class LevelBuilder extends JPanel {
 
     private Image bg = new ImageIcon("resources/gridCloudBg.jpg").getImage();
 
-    private final Color RED = new Color(237, 50, 46);
-    private final Color BLUE = new Color(15, 158, 213);
-    private final Color ORANGE = new Color(237, 99, 44);
-    private final Color GREEN = new Color(71, 212, 90);
+    private final Color red = new Color(237, 50, 46);
+    private final Color blue = new Color(15, 158, 213);
+    private final Color orange = new Color(237, 99, 44);
+    private final Color green = new Color(71, 212, 90);
 
 
     private boolean hasStart;
@@ -117,18 +117,18 @@ public class LevelBuilder extends JPanel {
                     g.setColor(Color.BLACK);
                     break;
                 case 2:
-                    g.setColor(this.BLUE);
+                    g.setColor(this.blue);
                     break;
                 case 3:
-                    g.setColor(this.RED);
+                    g.setColor(this.red);
                     break;
                 case 4:
-                    g.setColor(this.ORANGE);
+                    g.setColor(this.orange);
                     hasStart = true;
                     startCoord = coord;
                     break;
                 case 5:
-                    g.setColor(this.GREEN);
+                    g.setColor(this.green);
                     hasGoal = true;
                     goalCoord = coord;
                     break;
