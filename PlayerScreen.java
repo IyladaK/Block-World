@@ -1,11 +1,15 @@
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class PlayerScreen extends JPanel{
+/**
+ * The playerScreen class.
+ * creates the panel which prompts the user to select which 
+ */
+public class PlayerScreen extends JPanel {
 
     public MainFrame parentFrame; //parent frame for panel switching functions
     private Image bg = new ImageIcon("resources/ChoosePlayers.png").getImage();
@@ -14,7 +18,11 @@ public class PlayerScreen extends JPanel{
     final int HEIGHT = 687;
     
 
-    public PlayerScreen(MainFrame parentFrame){
+    /**
+     * The playerScreen constructor.
+     * @param parentFrame the mainframe used for panel switching functions
+     */
+    public PlayerScreen(MainFrame parentFrame) {
         this.parentFrame = parentFrame;
 
         setPreferredSize(new Dimension(960, 687));
@@ -23,10 +31,10 @@ public class PlayerScreen extends JPanel{
         JButton toGameOneP = new JButton();
         JButton toGameTwoP = new JButton();
 
-        // // creating invisible start button
+        // creating invisible buttons
         toGameTwoP.setBounds(600, 555, 205, 90);
         toGameOneP.setBounds(165, 555, 205, 90);
-
+        // setting the game to multiplayer when this button is pressed
         toGameTwoP.addActionListener(e -> {
             this.parentFrame.switchPlayerToLevelB();
             isMultiplayer = true;
@@ -35,6 +43,7 @@ public class PlayerScreen extends JPanel{
         toGameTwoP.setContentAreaFilled(false);
         toGameTwoP.setBorderPainted(false);
 
+        // setting the game to singleplayer when this button is pressed
         toGameOneP.addActionListener(e -> {
             this.parentFrame.switchPlayerToLevelB();
             isMultiplayer = false;

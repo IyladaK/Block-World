@@ -51,7 +51,10 @@ public class BoxPeople {
     }
 
 
-    public void hitRed(){
+    /**
+     * If the character hits a red block, they die and respawn at the start block. 
+     */
+    public void hitRed() {
         this.x = INIT_X;
         this.y = INIT_Y - 30;
     }
@@ -62,15 +65,16 @@ public class BoxPeople {
 
     /**
      * the set method.
-     * this links key input to the movemento of the box people
+     * this links key input to the movement of the box people
      * 
      */
     public void set() {
+
         // Slows down the person if no keys are being pressed
         if (keyLeft && keyRight || !keyLeft && !keyRight) {
             xSpeed *= 0.6;
         } else if (keyLeft && !keyRight) {
-            //moves to th left
+            //moves to the left
             xSpeed--;
         } else if (keyRight && !keyLeft) {
             //moves to the right
@@ -93,7 +97,7 @@ public class BoxPeople {
             xSpeed = -5;
         }
 
-        // Maximum value for y
+        // Maximum value for yspeed 
         if (ySpeed > 8) {
             ySpeed = 8;
         }
@@ -102,7 +106,7 @@ public class BoxPeople {
         ySpeed += 0.3; 
 
         if (keyUp) {
-            //Jump only if touching ground
+            //Character should be able to jump only if it's touching the ground
             boolean onGround = false;
 
             hitBox.y++;
@@ -120,17 +124,18 @@ public class BoxPeople {
             hitBox.y--;
         }
 
-        //Horizontal collisions, checks to see if movement will cause a collision.
+        //Horizontal collisions, checks to see if movement will cause a collision
         hitBox.x += xSpeed;
         for (Walls.GameWall wall : panel.walls) {
             if (hitBox.intersects(wall.hitBox)) {
                 if (!(wall instanceof Walls.BlueWall)) {
                     hitBox.x -= xSpeed;
-
+                    // moves closer while not intersecting
                     while (!wall.hitBox.intersects(hitBox)) {
                         hitBox.x += Math.signum(xSpeed);
                     }
                     hitBox.x -=  Math.signum(xSpeed);
+                    //stops if intersecting
                     xSpeed = 0;
                     x = hitBox.x;
 
@@ -182,6 +187,10 @@ public class BoxPeople {
          
     }
 
+    /**
+     * Draws the box person as a filled rectangle using its color, position and size.
+     * @param gtd the Graphics2D context for rendering the box person.
+     */
     public void draw(Graphics2D gtd) {
         gtd.setColor(this.color);
         gtd.fillRect(x, y, width, height);
