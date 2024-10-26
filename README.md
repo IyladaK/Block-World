@@ -39,9 +39,11 @@ This game was developed for the TU Eindhoven 2IP90 Challenge Based Learning proj
 **Credits**
 
 Code
+
 “Java Platformer Game Tutorial - Ep. 1 Basic Movement and Collisions.” YouTube, uploaded by RedFlyer Coding, 21 Mar. 2019, https://www.youtube.com/watch?v=Icd2gAHDSfY.
 
 **Fonts**
+
 Press Start 2P - https://www.dafont.com/press-start-2p.font 
 
 
