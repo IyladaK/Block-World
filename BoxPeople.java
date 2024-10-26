@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 
 public class BoxPeople {
 
-    GamePanel panel;
+    Game panel;
 
     int x;
     int y;
@@ -36,7 +36,7 @@ public class BoxPeople {
      * @param y y coordinate of the position of the box person
      * @param panel creates an instance of the GamePanel class 
      */
-    public BoxPeople(int x, int y, GamePanel panel) {
+    public BoxPeople(int x, int y, Game panel) {
         this.panel = panel;
         this.x = x;
         this.y = y;

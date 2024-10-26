@@ -1,13 +1,6 @@
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import java.awt.Font;
-import java.awt.Dimension;
-
 import java.awt.FlowLayout;
-import java.awt.Color;
 import java.awt.Container;
 
 
@@ -51,40 +44,18 @@ public class MainFrame extends JFrame {
     public void switchLevelBuilderToGame(){
         contentPane.removeAll();  // Remove all components
         
-        JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
-
-        JLabel description = new JLabel("Play!");
-        description.setFont(new Font("Arial", Font.PLAIN, 25));
-        header.add(description);
-
-        GamePanel panel = new GamePanel(levelBuilderObj.getFilledCoords(), 
-                        levelBuilderObj.getStartCoord(), levelBuilderObj.getGoalCoord(), 
-                        playerScreen.getMultiplayer());
-        panel.setPreferredSize(contentPane.getSize());  // Use contentPane's size
-        panel.setBackground(Color.WHITE);
-        panel.setFocusable(true);
-
-        JButton editLevel = new JButton("Edit Level");
-        editLevel.addActionListener(e -> {
-            panel.requestFocusInWindow();
-        });
-        
-        editLevel.setPreferredSize(new Dimension(210, 40));
-        header.add(editLevel);
-
-        contentPane.add(header);
-        contentPane.add(panel);
-
-        panel.requestFocusInWindow();
-
-        panel.addKeyListener(new KeyChecker(panel.player));
-        if (playerScreen.getMultiplayer()) {
-            panel.addKeyListener(new KeyChecker(panel.playerTwo));
-        }
+        new GamePanel(this, contentPane);
 
         contentPane.revalidate();
         contentPane.repaint(); 
-        
+    }
 
+    public void switchGameToLevelBuilder(){
+        contentPane.removeAll();
+
+        contentPane.add(levelBuilder);
+
+        contentPane.revalidate();
+        contentPane.repaint();
     }
 }
