@@ -21,7 +21,7 @@ public class MainFrame extends JFrame{
     public MainFrame(){
         setTitle("BloxWorld");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 700);
+        setSize(960, 687);
         setResizable(false);
         setLocationRelativeTo(null);
 
@@ -30,16 +30,6 @@ public class MainFrame extends JFrame{
         contentPane.add(menuScreen);
 
         setVisible(true);
-
-        // Remove all components after a delay
-        // Timer timer = new Timer(2000, e -> {
-        //     contentPane.removeAll();  // Remove all components
-        //     contentPane.add(levelBuilder);
-        //     contentPane.revalidate(); // Revalidate layout
-        //     contentPane.repaint();    // Repaint to update UI
-        // });
-        // timer.setRepeats(false); // Run only once
-        // timer.start();
     }
 
     public void switchMenuToLevelBuilder(){

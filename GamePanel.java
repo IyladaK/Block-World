@@ -36,6 +36,7 @@ public class GamePanel extends JPanel{
         this.goalCoord = goalCoord;
         this.isMultiplayer = isMultiplayer;
 
+
         player = new FirstPlayer((startCoord.x) * 30, (startCoord.y - 1) * 30, this);
         if (isMultiplayer) {
             playerTwo = new SecondPlayer(startCoord.x * 30, (startCoord.y - 1) * 30, this);
