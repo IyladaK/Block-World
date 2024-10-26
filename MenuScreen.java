@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 public class MenuScreen extends JPanel{
     
     public MainFrame parentFrame; //parent frame for panel switching functions
-    private Image bg = new ImageIcon("resources/MenuScreen-1.jpg").getImage();
+    private Image bg = new ImageIcon("resources/MenuScreen.png").getImage();
 
     public MenuScreen(MainFrame parentFrame){
         this.parentFrame = parentFrame;
@@ -17,18 +17,18 @@ public class MenuScreen extends JPanel{
         setPreferredSize(new Dimension(960, 687));
         setLayout(null);
 
-        JButton toGame = new JButton();
+        JButton toPlayers = new JButton();
 
         // creating invisible start button
         toGame.setBounds(672, 513, 228, 126);
         toGame.addActionListener(e -> {
             this.parentFrame.switchMenuToLevelBuilder();
         });
-        toGame.setOpaque(false);
-        toGame.setContentAreaFilled(false);
-        toGame.setBorderPainted(false);
+        toPlayers.setOpaque(false);
+        toPlayers.setContentAreaFilled(false);
+        toPlayers.setBorderPainted(false);
 
-        add(toGame);
+        add(toPlayers);
 
     }
 
