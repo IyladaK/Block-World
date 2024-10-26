@@ -20,9 +20,9 @@ public class MenuScreen extends JPanel{
         JButton toPlayers = new JButton();
 
         // creating invisible start button
-        toGame.setBounds(672, 513, 228, 126);
-        toGame.addActionListener(e -> {
-            this.parentFrame.switchMenuToLevelBuilder();
+        toPlayers.setBounds(672, 513, 228, 126);
+        toPlayers.addActionListener(e -> {
+            this.parentFrame.switchMenuToPlayerScreen();
         });
         toPlayers.setOpaque(false);
         toPlayers.setContentAreaFilled(false);

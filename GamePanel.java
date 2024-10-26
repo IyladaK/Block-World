@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.Image;
+import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -35,6 +36,8 @@ public class GamePanel extends JPanel{
         this.startCoord = startCoord;
         this.goalCoord = goalCoord;
         this.isMultiplayer = isMultiplayer;
+
+        setPreferredSize(new Dimension(960, 687));
 
 
         player = new FirstPlayer((startCoord.x) * 30, (startCoord.y - 1) * 30, this);
@@ -75,8 +78,6 @@ public class GamePanel extends JPanel{
     public void addBlueWall(Coord key) {
         walls.add(new Walls.BlueWall(key.x * 30, key.y * 30, 30, 30));
     }
-
-
 
     public void makeWalls() {
         // setting the start and goal blocks
