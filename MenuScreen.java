@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 public class MenuScreen extends JPanel{
     
     public MainFrame parentFrame; //parent frame for panel switching functions
-    private Image bg = new ImageIcon("resources/MenuScreen-1.jpg").getImage();
+    private Image bg = new ImageIcon("resources/MenuScreen.png").getImage();
 
     public MenuScreen(MainFrame parentFrame){
         this.parentFrame = parentFrame;
