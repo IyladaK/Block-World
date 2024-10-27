@@ -1,3 +1,7 @@
+package HelperClasses;
+
+import PlayerCharacters.BoxPeople;
+import PlayerCharacters.FirstPlayer;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 

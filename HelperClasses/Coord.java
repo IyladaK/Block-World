@@ -1,3 +1,5 @@
+package HelperClasses; 
+
 public class Coord {
     public final int x;
     public final int y;

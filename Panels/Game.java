@@ -1,3 +1,5 @@
+package Panels;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -8,6 +10,10 @@ import java.awt.Image;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import PlayerCharacters.FirstPlayer;
+import Frames.MainFrame;
+import HelperClasses.Coord;
+import PlayerCharacters.SecondPlayer;
 
 
 public class Game extends JPanel{
@@ -34,7 +40,7 @@ public class Game extends JPanel{
     Timer gameTimer;
 
     public Game(HashMap<Coord, Integer> filledCoords, Coord startCoord, Coord goalCoord, 
-                    boolean isMultiplayer, MainFrame parentFrame) {
+                boolean isMultiplayer, MainFrame parentFrame) {
 
         this.parentFrame = parentFrame;
         this.filledCoords = filledCoords;
@@ -72,7 +78,14 @@ public class Game extends JPanel{
         },0, 17 );
     }
 
+    public ArrayList<Walls.GameWall> getWalls(){
+        return this.walls;
+    }
 
+    public MainFrame getParentFrame(){
+        return this.parentFrame; 
+    }
+   
     public void addRedWall(Coord key) {
         walls.add(new Walls.RedWall(key.x * 30, key.y * 30, 30, 30));
     }

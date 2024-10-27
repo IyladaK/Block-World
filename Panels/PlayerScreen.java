@@ -1,9 +1,12 @@
+package Panels;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.JPanel;
+
+import Frames.MainFrame;
 
 public class PlayerScreen extends JPanel{
 

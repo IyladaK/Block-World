@@ -1,3 +1,4 @@
+package Panels;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,6 +16,9 @@ import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import HelperClasses.Coord;
+import Frames.MainFrame;
 
 
 
@@ -44,11 +48,7 @@ public class LevelBuilder extends JPanel {
     public LevelBuilder(MainFrame parentFrame) {
         this.parentFrame = parentFrame;
 
-        //create bottom floor
-        for(int i = 0; i < COLS; i++){
-            filledCoords.put(new Coord(i, 17), 1);
-        }
-
+        createFloor();
 
         setPreferredSize(new Dimension(COLS * C_S, ROWS * C_S));
         setBackground(Color.WHITE);
@@ -87,7 +87,13 @@ public class LevelBuilder extends JPanel {
         });
     }
 
-    void setCurColor(int newColor) {
+    private void createFloor() {
+        for(int i = 0; i < COLS; i++){
+            filledCoords.put(new Coord(i, 17), 1);
+        }
+    }
+
+    private void setCurColor(int newColor) {
         curColor = newColor;
     }
 
@@ -101,6 +107,11 @@ public class LevelBuilder extends JPanel {
 
     public Coord getGoalCoord() {
         return this.goalCoord;
+    }
+
+    public void restartFilledCoords() {
+        filledCoords.clear();
+        createFloor();
     }
 
     @Override

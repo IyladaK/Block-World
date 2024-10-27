@@ -1,7 +1,13 @@
+package Panels;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import Frames.MainFrame;
+import HelperClasses.KeyChecker;
+import HelperClasses.Coord;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Container;
@@ -16,17 +22,20 @@ public class GamePanel extends JPanel{
     public GamePanel(MainFrame parentFrame, Container contentPane){
         this.parentFrame = parentFrame;
         this.contentPane = contentPane;
+    }
 
+    public void gamePanel(){
         JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         JLabel description = new JLabel("Play!");
         description.setFont(new Font("Arial", Font.PLAIN, 25));
         header.add(description);
 
-        Game panel = new Game(parentFrame.levelBuilderObj.getFilledCoords(), 
-                        parentFrame.levelBuilderObj.getStartCoord(), 
-                        parentFrame.levelBuilderObj.getGoalCoord(), 
-                        parentFrame.playerScreen.getMultiplayer(), parentFrame);
+        LevelBuilder levelBuilder = parentFrame.getLevelBuilderObj();
+
+        Game panel = new Game(levelBuilder.getFilledCoords(), levelBuilder.getStartCoord(), 
+                            levelBuilder.getGoalCoord(), 
+                            parentFrame.getPlayerScreen().getMultiplayer(), parentFrame);
         panel.setPreferredSize(contentPane.getSize());  // Use contentPane's size
         panel.setBackground(Color.WHITE);
         panel.setFocusable(true);
@@ -46,15 +55,10 @@ public class GamePanel extends JPanel{
         panel.requestFocusInWindow();
 
         panel.addKeyListener(new KeyChecker(panel.player));
-        if (parentFrame.playerScreen.getMultiplayer()) {
+        if (parentFrame.getPlayerScreen().getMultiplayer()) {
             panel.addKeyListener(new KeyChecker(panel.playerTwo));
         }
-
-
     }
-
-
-
     
 
 }

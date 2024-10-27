@@ -1,6 +1,10 @@
+package PlayerCharacters;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import Panels.Game; 
+
 /**
  * The box people class.
  */
@@ -24,10 +28,10 @@ public class BoxPeople {
 
     Color color;
 
-    boolean keyLeft;
-    boolean keyRight;
-    boolean keyUp;
-    boolean keyDown;
+    public boolean keyLeft;
+    public boolean keyRight;
+    public boolean keyUp;
+    public boolean keyDown;
 
 
     /**
@@ -58,6 +62,8 @@ public class BoxPeople {
 
     public void reachedGoal(){
         System.out.println("REACHED GOAL!");
+        panel.getParentFrame().switchGameToEndScreen();
+
     }
 
     /**
@@ -107,7 +113,7 @@ public class BoxPeople {
 
             hitBox.y++;
 
-            for (Walls.GameWall wall: panel.walls) {
+            for (Walls.GameWall wall: panel.getWalls()) {
                 if (wall.hitBox.intersects(hitBox) && wall.hitBox.y > hitBox.y) {
                     onGround = true;
                     break;
@@ -122,7 +128,7 @@ public class BoxPeople {
 
         //Horizontal collisions, checks to see if movement will cause a collision.
         hitBox.x += xSpeed;
-        for (Walls.GameWall wall : panel.walls) {
+        for (Walls.GameWall wall : panel.getWalls()) {
             if (hitBox.intersects(wall.hitBox)) {
                 if (!(wall instanceof Walls.BlueWall)) {
                     hitBox.x -= xSpeed;
@@ -148,7 +154,7 @@ public class BoxPeople {
 
         //vertical collisions
         hitBox.y += ySpeed;
-        for (Walls.GameWall wall : panel.walls) {
+        for (Walls.GameWall wall : panel.getWalls()) {
             if (hitBox.intersects(wall.hitBox)) {
 
                 if (!(wall instanceof Walls.BlueWall)){

@@ -1,5 +1,14 @@
+package Frames; 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import Panels.EndScreen;
+import Panels.GamePanel;
+import Panels.LevelBuilder;
+import Panels.MenuScreen;
+import Panels.PlayerScreen;
+
 import java.awt.FlowLayout;
 import java.awt.Container;
 
@@ -10,6 +19,8 @@ public class MainFrame extends JFrame {
     LevelBuilder levelBuilderObj = new LevelBuilder(this);
     JPanel levelBuilder = levelBuilderObj.levelBuilder();
     GamePanel game;
+    EndScreen endScreen = new EndScreen(this);
+
     Container contentPane;
 
     public MainFrame(){
@@ -24,6 +35,14 @@ public class MainFrame extends JFrame {
         contentPane.add(menuScreen);
 
         setVisible(true);
+    }
+
+    public LevelBuilder getLevelBuilderObj(){
+        return this.levelBuilderObj;
+    }
+
+    public PlayerScreen getPlayerScreen(){
+        return this.playerScreen;
     }
 
     public void switchMenuToPlayerScreen(){
@@ -43,9 +62,8 @@ public class MainFrame extends JFrame {
 
     public void switchLevelBuilderToGame(){
         contentPane.removeAll();  // Remove all components
-        
-        new GamePanel(this, contentPane);
-
+        this.game = new GamePanel(this, contentPane);
+        game.gamePanel();
         contentPane.revalidate();
         contentPane.repaint(); 
     }
@@ -57,5 +75,31 @@ public class MainFrame extends JFrame {
 
         contentPane.revalidate();
         contentPane.repaint();
+    }
+
+    public void switchGameToEndScreen(){
+        contentPane.removeAll();
+
+        contentPane.add(endScreen);
+
+        contentPane.revalidate();
+        contentPane.repaint();
+    }
+
+    public void switchEndScreenToGame(){
+        contentPane.removeAll();
+        game.gamePanel();
+        contentPane.revalidate();
+        contentPane.repaint();
+
+    }
+
+    public void switchEndScreenToPlayerScreen(){
+        contentPane.removeAll();
+        this.levelBuilderObj.restartFilledCoords();
+        contentPane.add(playerScreen);
+        contentPane.revalidate();
+        contentPane.repaint();
+
     }
 }

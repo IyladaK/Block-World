@@ -1,4 +1,7 @@
+package PlayerCharacters;
 import java.awt.Color;
+
+import Panels.Game;
 
 public class FirstPlayer extends BoxPeople{
 
