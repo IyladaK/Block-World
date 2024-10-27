@@ -1,23 +1,26 @@
 package PlayerCharacters;
 
+import Panels.Game; 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import Panels.Game; 
+
 
 /**
  * The box people class.
- * The class which creates the characters for this game and specifies their movement. 
+ * The class which creates the Box characters, constantly updating their x and y positions using
+ * the KeyChecker class to listen to player key inputs. Checks for collisions and defines the
+ * interactions with different Wall objects.
  */
 
 public class BoxPeople {
 
     Game panel;
 
-    int x;
-    int y;
-    final int INIT_X;
-    final int INIT_Y;
+    private int x;
+    private int y;
+    private final int INIT_X;
+    private final int INIT_Y;
 
     int width;
     int height;
@@ -57,7 +60,12 @@ public class BoxPeople {
 
     }
 
-    public void setXY(int x, int y){
+    /**
+     * Dual Setter method for the x and y coordinates of the Box Character.
+     * @param x - int x coordinate.
+     * @param y - int y coordinate.
+     */
+    public void setXY(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -180,6 +188,7 @@ public class BoxPeople {
                     this.hitRed();
                 }
 
+                // goal block vertical collision changes booleans
                 if (wall instanceof Walls.GoalWall) {
                     reachedGoal = true;
                     panel.checkReachedGoal();

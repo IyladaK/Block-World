@@ -1,27 +1,31 @@
 package Panels;
 
+import Frames.MainFrame;
+import HelperClasses.Coord;
+import PlayerCharacters.FirstPlayer;
+import PlayerCharacters.SecondPlayer;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.awt.Image;
-import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import PlayerCharacters.FirstPlayer;
-import Frames.MainFrame;
-import HelperClasses.Coord;
-import PlayerCharacters.SecondPlayer;
 
+/**
+ * Class for Game, is-a JPanel. Creates the game environment using Walls and BoxPeople. 
+ * Takes filledCoords passed down from levelBuilder and instantiates Wall Objects of 
+ * the correct type in the correct coordinates.
+ * Instantiates BoxPeople (one for single player and two for multiplayer) and runs the game.
+ */
+public class Game extends JPanel {
 
-public class Game extends JPanel{
-
-    MainFrame parentFrame; 
-
-    HashMap<Coord, Integer> filledCoords;
-    HashMap<Integer, Runnable> wallMap;
+    MainFrame parentFrame; // MainFrame object which houses the panel
+    // passed in HashMap mapping coordinates to colors (denoted by Integers)
+    HashMap<Coord, Integer> filledCoords; 
 
     private boolean isMultiplayer;
 
@@ -39,6 +43,16 @@ public class Game extends JPanel{
     
     Timer gameTimer;
 
+    /**
+     * Constructor for the Game Object. Houses the gameloop run function, and creates the 
+     * game environment.
+     * @param filledCoords - Hashmap(Coords -> Integer) passed in from levelBuilder.
+     * @param startCoord - Starting coordinate passed in from levelBuilder
+     * @param goalCoord - Goal coordinate passed in from levelBuilder
+     * @param isMultiplayer - Boolean of whether mulitplayer was chosen in PlayerScreen
+     * @param parentFrame - MainFrame Object where the game panel is house, used to call 
+     *                      switch functions
+     */
     public Game(HashMap<Coord, Integer> filledCoords, Coord startCoord, Coord goalCoord, 
                 boolean isMultiplayer, MainFrame parentFrame) {
 
@@ -75,7 +89,7 @@ public class Game extends JPanel{
                 repaint();
             }
             
-        },0, 17 );
+        }, 0, 17);
     }
 
     public ArrayList<Walls.GameWall> getWalls() {
@@ -98,6 +112,13 @@ public class Game extends JPanel{
         walls.add(new Walls.BlueWall(key.x * 30, key.y * 30, 30, 30));
     }
 
+    /**
+     * Called when any BoxPlayer character vertically collides with the goal block.
+     * Sets the position of the character away from the goal block to avoid interference,
+     * resests the reachedGoal to false.
+     * 
+     * For multiplayer, both characters must be on the goal block at the same time.
+     */
     public void checkReachedGoal() {
         if (isMultiplayer) {
             if (player.reachedGoal && playerTwo.reachedGoal) {
@@ -120,6 +141,11 @@ public class Game extends JPanel{
         }
     }
 
+    /**
+     * Creates off-screen boundaries and red blocks in the bottom void. Iterates through the passed
+     * in filledCoords HashMap and adds the corresponding Walls to the walls double array used in
+     * the game environment. 
+     */
     public void makeWalls() {
         // setting the start and goal blocks
         walls.add(new Walls.StartWall(startCoord.x * 30, startCoord.y * 30, 30, 30));
@@ -159,6 +185,7 @@ public class Game extends JPanel{
 
     }
 
+    @Override
     public void paint(Graphics g) {
         
         super.paint(g);

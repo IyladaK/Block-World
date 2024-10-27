@@ -1,11 +1,12 @@
 package Panels;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
+import Frames.MainFrame;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
-import Frames.MainFrame;
 
 /**
  * The playerScreen class.
@@ -59,10 +60,17 @@ public class PlayerScreen extends JPanel {
 
     }
 
+    /**
+     * getter method for isMultiplayer.
+     * @return - boolean isMultiplayer
+     */
     public boolean getMultiplayer() {
         return isMultiplayer;
     }
 
+    /**
+     * Overriden paintComponent method which draws the ChoosePlayers.png image.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

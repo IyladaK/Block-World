@@ -1,20 +1,29 @@
 package Panels;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
+import Frames.MainFrame;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import Frames.MainFrame;
-
-
-public class MenuScreen extends JPanel{
+/**
+ * MenuScreen class is-a JPanel. First screen that player is met with, houses button
+ * which switches the PlayerScreen.
+ * MenuScreen panel is hosued within MainFrame.
+ */
+public class MenuScreen extends JPanel {
     
     public MainFrame parentFrame; //parent frame for panel switching functions
     private Image bg = new ImageIcon("resources/MenuScreen.png").getImage();
 
-    public MenuScreen(MainFrame parentFrame){
+    /**
+     * Constructor for MenuScreen. Sets the size and layout specifics and defines the 
+     * boundaries of an invisible button to switch to PlayerScreen.
+     * @param parentFrame - the MainFrame parent object which houses this MenuScreen object.
+     */
+    public MenuScreen(MainFrame parentFrame) {
         this.parentFrame = parentFrame;
 
         setPreferredSize(new Dimension(960, 687));
