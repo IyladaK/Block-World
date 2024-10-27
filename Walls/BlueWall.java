@@ -3,9 +3,21 @@ package Walls;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class BlueWall extends GameWall{
+/**
+ * The blueWall class. Is-a GameWall.
+ * Creates the climable blocks for the game.
+ * 
+ */
+public class BlueWall extends GameWall {
 
-    public BlueWall(int x, int y, int width, int height){
+    /**
+     * The constuctor for the blue walls which inherits from the GameWall class.
+     * @param x x position of the block
+     * @param y y position of the block
+     * @param width width of the block
+     * @param height height of the block
+     */
+    public BlueWall(int x, int y, int width, int height) {
         super(x, y, width, height);
         this.color = new Color(15, 158, 213);
     }
