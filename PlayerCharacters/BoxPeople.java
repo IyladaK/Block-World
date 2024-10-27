@@ -34,6 +34,8 @@ public class BoxPeople {
     public boolean keyUp;
     public boolean keyDown;
 
+    public boolean reachedGoal = false;
+
 
     /**
      * The constructor for the box people.
@@ -55,6 +57,11 @@ public class BoxPeople {
 
     }
 
+    public void setXY(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+
 
     /**
      * If the character hits a red block, they die and respawn at the start block. 
@@ -64,11 +71,6 @@ public class BoxPeople {
         this.y = INIT_Y - 30;
     }
 
-    public void reachedGoal(){
-        System.out.println("REACHED GOAL!");
-        panel.getParentFrame().switchGameToEndScreen();
-
-    }
 
     /**
      * the set method.
@@ -152,7 +154,12 @@ public class BoxPeople {
                     }
 
                     if (wall instanceof Walls.GoalWall) {
-                        this.reachedGoal();
+                        if (!reachedGoal) {
+                            reachedGoal = true;
+                            panel.checkReachedGoal();
+                        }
+                    } else {
+                        reachedGoal = false;
                     }
                 } 
             }
@@ -181,8 +188,13 @@ public class BoxPeople {
                 }
 
                 if (wall instanceof Walls.GoalWall) {
-                    this.reachedGoal();
+                    reachedGoal = true;
+                    panel.checkReachedGoal();
+                } else {
+                    reachedGoal = false;
                 }
+
+                panel.checkReachedGoal();
             }
         }
 

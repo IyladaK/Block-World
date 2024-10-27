@@ -18,6 +18,7 @@ public class GamePanel extends JPanel{
     
     MainFrame parentFrame;
     Container contentPane;
+    Game panel;
 
     public GamePanel(MainFrame parentFrame, Container contentPane){
         this.parentFrame = parentFrame;
@@ -33,7 +34,7 @@ public class GamePanel extends JPanel{
 
         LevelBuilder levelBuilder = parentFrame.getLevelBuilderObj();
 
-        Game panel = new Game(levelBuilder.getFilledCoords(), levelBuilder.getStartCoord(), 
+        panel = new Game(levelBuilder.getFilledCoords(), levelBuilder.getStartCoord(), 
                             levelBuilder.getGoalCoord(), 
                             parentFrame.getPlayerScreen().getMultiplayer(), parentFrame);
         panel.setPreferredSize(contentPane.getSize());  // Use contentPane's size
@@ -58,6 +59,10 @@ public class GamePanel extends JPanel{
         if (parentFrame.getPlayerScreen().getMultiplayer()) {
             panel.addKeyListener(new KeyChecker(panel.playerTwo));
         }
+    }
+
+    public Game getPanel(){
+        return this.panel;
     }
     
 

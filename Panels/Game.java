@@ -25,8 +25,8 @@ public class Game extends JPanel{
 
     private boolean isMultiplayer;
 
-    FirstPlayer player;
-    SecondPlayer playerTwo;
+    public FirstPlayer player;
+    public SecondPlayer playerTwo;
 
     ArrayList<Walls.GameWall> walls = new ArrayList<>();
 
@@ -78,11 +78,11 @@ public class Game extends JPanel{
         },0, 17 );
     }
 
-    public ArrayList<Walls.GameWall> getWalls(){
+    public ArrayList<Walls.GameWall> getWalls() {
         return this.walls;
     }
 
-    public MainFrame getParentFrame(){
+    public MainFrame getParentFrame() {
         return this.parentFrame; 
     }
    
@@ -96,6 +96,21 @@ public class Game extends JPanel{
 
     public void addBlueWall(Coord key) {
         walls.add(new Walls.BlueWall(key.x * 30, key.y * 30, 30, 30));
+    }
+
+    public void checkReachedGoal() {
+        if (isMultiplayer) {
+            if (player.reachedGoal && playerTwo.reachedGoal) {
+                player.setXY(startCoord.x * 30, startCoord.y * 30);
+                playerTwo.setXY(startCoord.x * 30, startCoord.y * 30);
+                parentFrame.switchGameToEndScreen();
+            }
+        } else {
+            if (player.reachedGoal) {
+                player.setXY(startCoord.x * 30, startCoord.y * 30);
+                parentFrame.switchGameToEndScreen();
+            }
+        }
     }
 
     public void makeWalls() {

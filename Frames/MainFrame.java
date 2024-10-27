@@ -62,8 +62,10 @@ public class MainFrame extends JFrame {
 
     public void switchLevelBuilderToGame(){
         contentPane.removeAll();  // Remove all components
+
         this.game = new GamePanel(this, contentPane);
         game.gamePanel();
+
         contentPane.revalidate();
         contentPane.repaint(); 
     }
@@ -89,6 +91,7 @@ public class MainFrame extends JFrame {
     public void switchEndScreenToGame(){
         contentPane.removeAll();
         game.gamePanel();
+
         contentPane.revalidate();
         contentPane.repaint();
 
