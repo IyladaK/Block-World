@@ -1,27 +1,43 @@
 package Panels;
-import java.awt.Dimension;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+
 import Frames.MainFrame;
 import HelperClasses.KeyChecker;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 
-public class GamePanel extends JPanel{
+/**
+ * Class for GamePanel, is-a JPanel. 
+ * This houses the game and additionally creates the header and edit level 
+ * button into the content pane in MainFrame. 
+ */
+public class GamePanel extends JPanel {
     
     MainFrame parentFrame;
     Container contentPane;
     Game panel;
 
+    /**
+     * Construcer for GamePanel.
+     * @param parentFrame - MainFrame which houses the panel.
+     * @param contentPane - the Container contentPane where panels need to be added. 
+     */
     public GamePanel(MainFrame parentFrame, Container contentPane){
         this.parentFrame = parentFrame;
         this.contentPane = contentPane;
     }
 
+    /**
+     * Method gamePanel which is called to instantiate a new game and populate the
+     * contentPane with the correct components.
+     * Defines the switch function for the editlevel button.
+     */
     public void gamePanel(){
         JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
 

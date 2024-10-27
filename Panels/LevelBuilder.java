@@ -1,4 +1,7 @@
 package Panels;
+
+import Frames.MainFrame;
+import HelperClasses.Coord;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,22 +9,24 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
-
 import javax.swing.ImageIcon;
-import java.awt.Image;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import HelperClasses.Coord;
-import Frames.MainFrame;
 
-
-
+/**
+ * Class for levelBuilder. This sets up a drawin environment where the user picks
+ * colors and draws their levels using buttons on the bottom pane. The top header
+ * error checks that there is at least one starta nd goal block.
+ * 
+ * This is directed from the PlayerScreen and directs to the game when the finished button
+ * is pressed.
+ */
 public class LevelBuilder extends JPanel {
     MainFrame parentFrame;
 
