@@ -1,4 +1,7 @@
 # Block world 
+**GitHub link**
+https://github.com/IyladaK/Block-World
+
 **General Description**
 
 BlockWorld is a single and dual-player 2d platformer that allows the player to draw their own level on a cell grid using various preset colors. Depending on which color they choose, their level will have different obstacles and challenges, for example:
