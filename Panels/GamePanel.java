@@ -3,11 +3,8 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import Frames.MainFrame;
 import HelperClasses.KeyChecker;
-import HelperClasses.Coord;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Container;
@@ -37,7 +34,7 @@ public class GamePanel extends JPanel{
         panel = new Game(levelBuilder.getFilledCoords(), levelBuilder.getStartCoord(), 
                             levelBuilder.getGoalCoord(), 
                             parentFrame.getPlayerScreen().getMultiplayer(), parentFrame);
-        panel.setPreferredSize(contentPane.getSize());  // Use contentPane's size
+        panel.setPreferredSize(contentPane.getSize());
         panel.setBackground(Color.WHITE);
         panel.setFocusable(true);
 
@@ -61,7 +58,7 @@ public class GamePanel extends JPanel{
         }
     }
 
-    public Game getPanel(){
+    public Game getPanel() {
         return this.panel;
     }
     

@@ -153,12 +153,12 @@ public class LevelBuilder extends JPanel {
         }
 
         if (hasStart) {
-            g.setColor(this.green);
+            g.setColor(this.orange);
             g.fillRect(startCoord.x * C_S, startCoord.y * C_S, C_S, C_S);
         }
 
         if (hasGoal) {
-            g.setColor(this.orange);
+            g.setColor(this.green);
             g.fillRect(goalCoord.x * C_S, goalCoord.y * C_S, C_S, C_S);
         }
     }

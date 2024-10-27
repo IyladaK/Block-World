@@ -101,13 +101,20 @@ public class Game extends JPanel{
     public void checkReachedGoal() {
         if (isMultiplayer) {
             if (player.reachedGoal && playerTwo.reachedGoal) {
+                player.reachedGoal = false;
+                playerTwo.reachedGoal = false;
+
                 player.setXY(startCoord.x * 30, startCoord.y * 30);
                 playerTwo.setXY(startCoord.x * 30, startCoord.y * 30);
+
                 parentFrame.switchGameToEndScreen();
             }
         } else {
             if (player.reachedGoal) {
+                player.reachedGoal = false;
+
                 player.setXY(startCoord.x * 30, startCoord.y * 30);
+                
                 parentFrame.switchGameToEndScreen();
             }
         }

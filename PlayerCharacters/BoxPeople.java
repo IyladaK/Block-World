@@ -153,14 +153,7 @@ public class BoxPeople {
                         this.hitRed();
                     }
 
-                    if (wall instanceof Walls.GoalWall) {
-                        if (!reachedGoal) {
-                            reachedGoal = true;
-                            panel.checkReachedGoal();
-                        }
-                    } else {
-                        reachedGoal = false;
-                    }
+                    //Player must stand on goal block
                 } 
             }
         }
@@ -170,7 +163,7 @@ public class BoxPeople {
         for (Walls.GameWall wall : panel.getWalls()) {
             if (hitBox.intersects(wall.hitBox)) {
 
-                if (!(wall instanceof Walls.BlueWall)){
+                if (!(wall instanceof Walls.BlueWall)) {
                     hitBox.y -= ySpeed;
 
                     while (!wall.hitBox.intersects(hitBox)) {
@@ -193,8 +186,6 @@ public class BoxPeople {
                 } else {
                     reachedGoal = false;
                 }
-
-                panel.checkReachedGoal();
             }
         }
 
