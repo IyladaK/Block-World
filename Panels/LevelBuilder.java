@@ -61,11 +61,9 @@ public class LevelBuilder extends JPanel {
                 int row = e.getX() / C_S;
                 int col = e.getY() / C_S;
 
-                if(curColor != 0){
-                    filledCoords.put(new Coord(row, col), curColor);
-                } else {
-                    filledCoords.remove(new Coord(row, col));
-                }
+                Coord curCoord = new Coord(row, col);
+
+                colorChecker(curCoord);
                 paintComponent(getGraphics());
                 
             }
@@ -77,14 +75,27 @@ public class LevelBuilder extends JPanel {
                 int row = e.getX() / C_S;
                 int col = e.getY() / C_S;
 
-                if(curColor != 0){
-                    filledCoords.put(new Coord(row, col), curColor);
-                } else {
-                    filledCoords.remove(new Coord(row, col));
-                }
+                Coord curCoord = new Coord(row, col);
+
+                colorChecker(curCoord);
                 paintComponent(getGraphics());
             }
         });
+    }
+
+    private void colorChecker(Coord curCoord) {
+        if (curColor == 0) {
+            filledCoords.remove(curCoord);
+            
+        } else if (curColor == 5) {
+            hasGoal = true;
+            goalCoord = curCoord;
+        } else if (curColor == 4) {
+            hasStart = true;
+            startCoord = curCoord;
+        } else {
+            filledCoords.put(curCoord, curColor);
+        }
     }
 
     private void createFloor() {
@@ -109,8 +120,12 @@ public class LevelBuilder extends JPanel {
         return this.goalCoord;
     }
 
-    public void restartFilledCoords() {
+    public void restartGameState() {
         filledCoords.clear();
+        hasStart = false;
+        hasGoal = false;
+        startCoord = null;
+        goalCoord = null;
         createFloor();
     }
 
@@ -120,8 +135,6 @@ public class LevelBuilder extends JPanel {
 
         g.drawImage(bg, 0, 0, this.getWidth(), this.getHeight(), this);
 
-        this.hasStart = false;
-        this.hasGoal = false;
         for (Coord coord : filledCoords.keySet()) {
             switch (filledCoords.get(coord)) {
                 case 1:
@@ -133,20 +146,20 @@ public class LevelBuilder extends JPanel {
                 case 3:
                     g.setColor(this.red);
                     break;
-                case 4:
-                    g.setColor(this.orange);
-                    hasStart = true;
-                    startCoord = coord;
-                    break;
-                case 5:
-                    g.setColor(this.green);
-                    hasGoal = true;
-                    goalCoord = coord;
-                    break;
                 default:
                     break;
             }
             g.fillRect(coord.x * C_S, coord.y * C_S, C_S, C_S);
+        }
+
+        if (hasStart) {
+            g.setColor(this.green);
+            g.fillRect(startCoord.x * C_S, startCoord.y * C_S, C_S, C_S);
+        }
+
+        if (hasGoal) {
+            g.setColor(this.orange);
+            g.fillRect(goalCoord.x * C_S, goalCoord.y * C_S, C_S, C_S);
         }
     }
 
@@ -198,13 +211,15 @@ public class LevelBuilder extends JPanel {
         buttonPanel3.add(start);
         buttonPanel3.add(goal);
         finish.addActionListener(e -> {
-            if(!this.hasGoal){
-                description.setText("Please set at least one goal block");
+            if (!this.hasGoal) {
+                description.setText("Please set a goal block");
                 description.setForeground(Color.RED);
             } else if (!this.hasStart) {
-                description.setText("Please set at least one start block");
+                description.setText("Please set a start block");
                 description.setForeground(Color.RED);
             } else {
+                filledCoords.remove(startCoord);
+                filledCoords.remove(goalCoord);
                 this.parentFrame.switchLevelBuilderToGame();
             }
             

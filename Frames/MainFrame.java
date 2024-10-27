@@ -99,7 +99,7 @@ public class MainFrame extends JFrame {
 
     public void switchEndScreenToPlayerScreen(){
         contentPane.removeAll();
-        this.levelBuilderObj.restartFilledCoords();
+        this.levelBuilderObj.restartGameState();
         contentPane.add(playerScreen);
         contentPane.revalidate();
         contentPane.repaint();
